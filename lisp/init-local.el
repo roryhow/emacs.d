@@ -32,13 +32,14 @@
 (exec-path-from-shell-initialize)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
+(setq web-mode-content-types-alist
+      '(("jsx" . "\\.js[x]?\\'")))
+
 ;; use web-mode for .jsx files
 ;; lets use webmode on js files for now
 ;; lets also use for typscript
 (add-to-list 'auto-mode-alist '("\\.js$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.ts$" . typescript-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx$" . web-mode))
 
 ;; disable jshint since we prefer eslint checking
 (setq-default flycheck-disabled-checkers
@@ -46,10 +47,8 @@
                       '(javascript-jshint)))
 
 ;; use eslint with web-mode for jsx files
-(flycheck-add-mode 'typescript-tslint 'typescript-mode)
 (flycheck-add-mode 'javascript-eslint 'web-mode)
 (flycheck-add-mode 'javascript-eslint 'js2-mode)
-(flycheck-add-mode 'typescript-tslint 'web-mode)
 
 ;; customize flycheck temp file prefix
 (setq-default flycheck-temp-prefix ".flycheck")
@@ -78,21 +77,6 @@
       (setq-local flycheck-javascript-eslint-executable eslint))))
 (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
-
-
-;; use local eslint from node_modules before global
-;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
-(defun my/use-tslint-from-node-modules ()
-  (let* ((root (locate-dominating-file
-                (or (buffer-file-name) default-directory)
-                "node_modules"))
-         (tslint (and root
-                      (expand-file-name "node_modules/eslint/bin/tslint"
-                                        root))))
-    (when (and tslint (file-executable-p tslint))
-      (setq-local flycheck-typescript-tslint-executable tslint))))
-(add-hook 'flycheck-mode-hook #'my/use-tslint-from-node-modules)
-
 ;; adjust indents for web-mode to 2 spaces
 (defun my-web-mode-hook ()
   "Hooks for Web mode. Adjust indents"
@@ -114,33 +98,9 @@
 ;; Add prettier
 ;; (require 'prettier-js)
 
-(maybe-require-package 'tide)
-(defun setup-tide-mode ()
-  (interactive)
-  (tide-setup)
-  (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-  (eldoc-mode +1)
-  (tide-hl-identifier-mode +1)
-  (company-mode +1))
-
-;; aligns annotation to the right hand side
-(setq company-tooltip-align-annotations t)
-
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-(add-hook 'web-mode-hook
-          (lambda ()
-            (when (string-equal "tsx" (file-name-extension buffer-file-name))
-              (setup-tide-mode))))
-
-(add-hook 'web-mode-hook #'setup-tide-mode)
-;; (add-hook 'typescript-mode-hook #'setup-tide-mode)
-
-(setq tide-format-options '(:indentSize 0 :tabSize 0))
-
-(setq typescript-indent-level 2)
 (desktop-save-mode -1)
 (menu-bar-mode -1)
+(setq exec-path-from-shell-arguments '("-l"))
 
 (provide 'init-local)
 ;;; init-local.el ends here
