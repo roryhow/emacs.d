@@ -1,4 +1,4 @@
-(maybe-require-package 'org-fstree)
+;; (maybe-require-package 'org-fstree)
 (when *is-a-mac*
   (maybe-require-package 'grab-mac-link))
 
@@ -17,7 +17,8 @@
       org-fast-tag-selection-single-key 'expert
       org-html-validation-link nil
       org-export-kill-product-buffer-when-displayed t
-      org-tags-column 80)
+      org-tags-column 80
+      org-startup-truncated nil)
 
 
 ;; Lots of stuff from http://doc.norang.ca/org-mode.html

@@ -25,7 +25,7 @@
 
 ;; Set custom tab width
 (setq tab-width 2)
-(setq-default indent-tabs-mode nil)
+;; (setq-default indent-tabs-mode nil)
 
 ;; ensure flycheck is installed and enable
 (global-flycheck-mode)
@@ -40,6 +40,10 @@
 ;; lets also use for typscript
 (add-to-list 'auto-mode-alist '("\\.js$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+
+
+;; associate restclient-mode for .http files
+(add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode))
 
 ;; disable jshint since we prefer eslint checking
 (setq-default flycheck-disabled-checkers
@@ -100,6 +104,7 @@
 
 (desktop-save-mode -1)
 (menu-bar-mode -1)
+
 (setq exec-path-from-shell-arguments '("-l"))
 
 (provide 'init-local)

@@ -3,6 +3,11 @@
 (when (maybe-require-package 'cider)
   (setq nrepl-popup-stacktraces nil)
 
+  ;; (setq cider-cljs-lein-repl
+  ;;       "(do (require 'figwheel-sidecar.repl-api)
+  ;;             (figwheel-sidecar.repl-api/start-figwheel!)
+  ;;           (figwheel-sidecar.repl-api/cljs-repl))")
+
   (after-load 'cider
     (add-hook 'cider-mode-hook 'eldoc-mode)
     (add-hook 'cider-repl-mode-hook 'subword-mode)
