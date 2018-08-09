@@ -91,7 +91,7 @@
 (desktop-save-mode -1)
 (menu-bar-mode -1)
 
-(setq exec-path-from-shell-arguments '("-l"))
+(setq exec-path-from-shell-check-startup-files nil)
 
 (provide 'init-local)
 ;;; init-local.el ends here
