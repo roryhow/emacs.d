@@ -6,6 +6,10 @@
 (define-key global-map (kbd "C-c l") 'org-store-link)
 (define-key global-map (kbd "C-c a") 'org-agenda)
 
+(setq org-agenda-files (list "~/Documents/org/work.org"
+                             "~/Documents/org/home.org"
+                             "~/Documents/org/uni.org"))
+
 ;; Various preferences
 (setq org-log-done t
       org-edit-timestamp-down-means-later t
@@ -111,11 +115,18 @@ typical word processor."
 (global-set-key (kbd "C-c c") 'org-capture)
 
 (setq org-capture-templates
-      `(("t" "todo" entry (file "")  ; "" => `org-default-notes-file'
-         "* NEXT %?\n%U\n" :clock-resume t)
-        ("n" "note" entry (file "")
+      `(("h" "Home TODO" entry (file+headline "~/Documents/org/home.org" "Tasks")
+         "* TODO %?\n%U\n" :clock-resume t)
+        ("w" "Work TODO" entry (file+headline "~/Documents/org/work.org" "Tasks")
+         "* TODO %?\n%U\n" :clock-resume t)
+        ("u" "Uni TODO" entry (file+headline "~/Documents/org/uni.org" "Tasks")
+         "* TODO %?\n%U\n" :clock-resume t)
+        ("H" "Home note" entry (file+headline "~/Documents/org/home.org" "Notes")
          "* %? :NOTE:\n%U\n%a\n" :clock-resume t)
-        ))
+        ("W" "Work note" entry (file+headline "~/Documents/org/work.org" "Notes")
+         "* %? :NOTE:\n%U\n%a\n" :clock-resume t)
+        ("U" "Uni note" entry (file+headline "~/Documents/org/uni.org" "Notes")
+         "* %? :NOTE:\n%U\n%a\n" :clock-resume t)))
 
 
 
@@ -382,5 +393,7 @@ typical word processor."
      (sql . nil)
      (sqlite . t))))
 
+(eval-after-load "org"
+  '(require 'ox-md nil t))
 
 (provide 'init-org)
