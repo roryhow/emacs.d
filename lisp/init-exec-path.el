@@ -9,4 +9,8 @@
   (setq-default exec-path-from-shell-arguments nil)
   (exec-path-from-shell-initialize))
 
+;; this fixes things but it's a bit awkward
+;; (setenv "PATH" (concat (getenv "PATH") ":~/.nvm/versions/node/v10.8.0/bin"))
+;; (setq exec-path (append exec-path '("~/.nvm/versions/node/v10.8.0/bin")))
+
 (provide 'init-exec-path)
