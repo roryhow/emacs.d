@@ -7,13 +7,9 @@
 
 (after-load 'dart-mode
   (setq dart-sdk-path "/usr/local/bin/dart")
-  (setq dart-enable-analysis server t)
+  (setq dart-enable-analysis-server t)
   (add-hook 'dart-mode-hook 'flycheck-mode)
-  :bind
-  (:map dart-mode-map
-        ("M-." . my-dart-goto)
-        ("C-i" . company-indent-or-complete-common)
-        ("C-M-i" . company-indent-or-complete-common))
-  :config)
+  (define-key dart-mode-map (kbd "M-.") 'my-dart-goto)
+  (define-key dart-mode-map (kbd "C-i") 'company-indent-or-complete-common))
 
 (provide 'init-dart)

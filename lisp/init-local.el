@@ -91,6 +91,11 @@
 (desktop-save-mode -1)
 (menu-bar-mode 1)
 
+;; disable the bloody tooltips
+(setq tooltip-mode nil)
+(setq use-dialog-box nil)
+(setq x-gtk-use-system-tooltips nil)
+
 (setq exec-path-from-shell-check-startup-files nil)
 
 (provide 'init-local)
