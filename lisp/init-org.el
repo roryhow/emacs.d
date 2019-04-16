@@ -1,3 +1,7 @@
+;;; init-org.el --- Org-mode config -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
+
 (when *is-a-mac*
   (maybe-require-package 'grab-mac-link))
 
@@ -395,3 +399,4 @@ typical word processor."
   '(require 'ox-md nil t))
 
 (provide 'init-org)
+;;; init-org.el ends here
