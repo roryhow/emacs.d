@@ -5,6 +5,7 @@
 (maybe-require-package 'httprepl)
 (when (maybe-require-package 'restclient)
   (add-auto-mode 'restclient-mode "\\.rest\\'")
+  (add-auto-mode 'restclient-mode "\\.http\\'")
 
   (defun sanityinc/restclient ()
     (interactive)
