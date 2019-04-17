@@ -20,8 +20,8 @@
 ;; (setq exec-path (append exec-path '("~/.nvm/versions/node/v10.8.0/bin")))
 
 ;; fixing lein problems
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-(setq exec-path (append exec-path '("/usr/local/bin")))
+;; (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+;; (setq exec-path (append exec-path '("/usr/local/bin")))
 
 (provide 'init-exec-path)
 ;;; init-exec-path.el ends here

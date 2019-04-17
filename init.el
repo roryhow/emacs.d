@@ -58,7 +58,7 @@
 ;; (require 'init-themes)
 (require 'init-osx-keys)
 (require 'init-gui-frames)
-(require 'init-dired)
+;; (require 'init-dired)
 (require 'init-isearch)
 ;; (require 'init-grep)
 (require 'init-uniquify)
@@ -78,8 +78,8 @@
 (require 'init-editing-utils)
 (require 'init-whitespace)
 
-(require 'init-vc)
-(require 'init-darcs)
+;; (require 'init-vc)
+;; (require 'init-darcs)
 (require 'init-git)
 (require 'init-github)
 
@@ -130,14 +130,14 @@
 ;; (require 'init-misc)
 
 ;; (require 'init-folding)
-(require 'init-dash)
+;; (require 'init-dash)
 
 ;;(require 'init-twitter)
 ;; (require 'init-mu)
-(require 'init-ledger)
+;; (require 'init-ledger)
 ;; Extra packages which don't require any configuration
 
-(require-package 'gnuplot)
+;; (require-package 'gnuplot)
 ;; (require-package 'lua-mode)
 ;; (require-package 'htmlize)
 ;; (require-package 'dsvn)
