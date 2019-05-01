@@ -17,10 +17,11 @@
     (add-hook 'cider-repl-mode-hook 'paredit-mode))
 
   ;; Not working for me
-  ;; (require-package 'flycheck-clojure)
+  (require-package 'flycheck-clojure)
   ;; (after-load 'clojure-mode
   ;;   (after-load 'cider
   ;;     (after-load 'flycheck
+  ;;       (message "setting up flycheck-clojure-setup")
   ;;       (flycheck-clojure-setup))))
   )
 

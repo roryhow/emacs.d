@@ -49,11 +49,11 @@
 ;; Load configs for specific features and modes
 ;;----------------------------------------------------------------------------
 
-(require-package 'diminish)
+;; (require-package 'diminish)
 (maybe-require-package 'scratch)
-(require-package 'command-log-mode)
+;; (require-package 'command-log-mode)
 
-(require 'init-frame-hooks)
+;; (require 'init-frame-hooks)
 ;; (require 'init-xterm)
 ;; (require 'init-themes)
 (require 'init-osx-keys)
@@ -89,7 +89,7 @@
 ;;(require 'init-crontab)
 (require 'init-textile)
 (require 'init-markdown)
-(require 'init-csv)
+;; (require 'init-csv)
 ;; (require 'init-erlang)
 (require 'init-javascript)
 (require 'init-typescript)
@@ -114,8 +114,8 @@
 ;; (require 'init-docker)
 (require 'init-terraform)
 ;; (require 'init-dart)
-;;(require 'init-nix)
-(maybe-require-package 'nginx-mode)
+;; (require 'init-nix)
+;; (maybe-require-package 'nginx-mode)
 
 (require 'init-paredit)
 (require 'init-lisp)
