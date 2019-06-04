@@ -82,6 +82,7 @@
 ;; (require 'init-darcs)
 (require 'init-git)
 (require 'init-github)
+(require 'init-go)
 
 (require 'init-projectile)
 

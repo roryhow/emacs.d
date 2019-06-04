@@ -10,6 +10,7 @@
 
 ;; use local eslint from node_modules before global
 ;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
+;; This assumes we're in typescript all the time or it will fail
 (defun my/use-tslint-from-node-modules ()
   "Load the local tslint."
   (let* ((root (locate-dominating-file
@@ -20,7 +21,6 @@
                                         root))))
     (when (and tslint (file-executable-p tslint))
       (setq-local flycheck-typescript-tslint-executable tslint))))
-(add-hook 'flycheck-mode-hook #'my/use-tslint-from-node-modules)
 
 (defun setup-tide-mode ()
   (interactive)
@@ -29,10 +29,8 @@
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
+  (add-hook 'flycheck-mode-hook #'my/use-tslint-from-node-modules)
   (company-mode +1))
-
-;; aligns annotation to the right hand side
-(setq company-tooltip-align-annotations t)
 
 (add-hook 'web-mode-hook
           (lambda ()

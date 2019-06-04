@@ -21,8 +21,11 @@
     (setq-default company-dabbrev-other-buffers 'all
                   company-tooltip-align-annotations t))
   (global-set-key (kbd "M-C-/") 'company-complete)
-  (when (maybe-require-package 'company-quickhelp)
-    (add-hook 'after-init-hook 'company-quickhelp-mode)))
+
+  ;; Piss off forever
+  ;; (when (maybe-require-package 'company-quickhelp)
+  ;;   (add-hook 'after-init-hook 'company-quickhelp-mode))
+  )
 
 ;; Suspend page-break-lines-mode while company menu is active
 ;; (see https://github.com/company-mode/company-mode/issues/416)
