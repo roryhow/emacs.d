@@ -11,6 +11,7 @@
 
 ;; Define function to call when go-mode loads
 (defun my-go-mode-hook ()
+  "Set up go-mode with some personal preferences."
   (add-hook 'before-save-hook 'gofmt-before-save)    ; gofmt before every save
   (setq gofmt-command "goimports")                   ; gofmt uses invokes goimports
   (if (not (string-match "go" compile-command))      ; set compile command default
@@ -23,6 +24,7 @@
   ;; linting
   (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
+
 
   ;; Key bindings specific to go-mode
   (local-set-key (kbd "M-.") 'godef-jump) ; Go to definition
