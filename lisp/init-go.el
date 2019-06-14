@@ -12,14 +12,14 @@
 ;; Define function to call when go-mode loads
 (defun my-go-mode-hook ()
   "Set up go-mode with some personal preferences."
-  (add-hook 'before-save-hook 'gofmt-before-save)    ; gofmt before every save
-  (setq gofmt-command "goimports")                   ; gofmt uses invokes goimports
-  (if (not (string-match "go" compile-command))      ; set compile command default
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  (setq gofmt-command "goimports")
+  (if (not (string-match "go" compile-command))
       (set (make-local-variable 'compile-command)
            "go build -v && go test -v && go vet"))
 
   ;; guru settings
-  (go-guru-hl-identifier-mode)                       ; highlight identifiers
+  (go-guru-hl-identifier-mode)
 
   ;; linting
   (eval-after-load 'flycheck
@@ -27,12 +27,12 @@
 
 
   ;; Key bindings specific to go-mode
-  (local-set-key (kbd "M-.") 'godef-jump) ; Go to definition
-  (local-set-key (kbd "M-*") 'pop-tag-mark) ; Return from whence you came
-  (local-set-key (kbd "M-p") 'compile)      ; Invoke compiler
-  (local-set-key (kbd "M-P") 'recompile) ; Redo most recent compile cmd
-  (local-set-key (kbd "M-]") 'next-error) ; Go to next error (or msg)
-  (local-set-key (kbd "M-[") 'previous-error) ; Go to previous error or msg
+  (local-set-key (kbd "M-.") 'godef-jump)
+  (local-set-key (kbd "M-*") 'pop-tag-mark)
+  (local-set-key (kbd "M-p") 'compile)
+  (local-set-key (kbd "M-P") 'recompile)
+  (local-set-key (kbd "M-]") 'next-error)
+  (local-set-key (kbd "M-[") 'previous-error)
 
   (local-set-key (kbd "C-c C-t f") 'go-test-current-file)
   (local-set-key (kbd "C-c C-t t") 'go-test-current-test)
