@@ -44,7 +44,9 @@
       org-html-validation-link nil
       org-export-kill-product-buffer-when-displayed t
       org-tags-column 80
-      org-startup-truncated nil)
+      org-startup-truncated nil
+      org-startup-with-inline-images t
+      org-startup-with-latex-preview t)
 
 
 ;; Lots of stuff from http://doc.norang.ca/org-mode.html

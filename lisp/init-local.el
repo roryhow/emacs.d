@@ -11,5 +11,11 @@
  indent-tabs-mode nil)
 (set-face-attribute 'default nil :height 130)
 
+(setq frame-title-format nil)
+
+(after-load 'eldoc
+  (when (maybe-require-package 'diminish)
+    (diminish 'eldoc-mode)))
+
 (provide 'init-local)
 ;;; init-local.el ends here

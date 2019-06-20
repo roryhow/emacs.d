@@ -9,7 +9,8 @@
   (setq-default projectile-mode-line-prefix " Proj")
 
   (after-load 'projectile
-    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+    (diminish 'projectile-mode))
 
   (maybe-require-package 'ibuffer-projectile))
 

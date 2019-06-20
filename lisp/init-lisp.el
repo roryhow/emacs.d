@@ -256,6 +256,10 @@
     (after-load 'elisp-mode
       (flycheck-package-setup))))
 
+
+(after-load 'elisp-mode
+  (when (maybe-require-package 'diminish)
+    (diminish 'elisp-slime-nav-mode)))
 
 
 ;; ERT
