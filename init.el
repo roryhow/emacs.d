@@ -50,7 +50,7 @@
 ;;----------------------------------------------------------------------------
 
 ;; (require-package 'diminish)
-(maybe-require-package 'scratch)
+;; (maybe-require-package 'scratch)
 ;; (require-package 'command-log-mode)
 
 ;; (require 'init-frame-hooks)
@@ -81,7 +81,7 @@
 ;; (require 'init-vc)
 ;; (require 'init-darcs)
 (require 'init-git)
-(require 'init-github)
+;; (require 'init-github)
 (require 'init-go)
 
 (require 'init-projectile)

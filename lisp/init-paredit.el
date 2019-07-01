@@ -47,7 +47,8 @@
 
 (require-package 'paredit-everywhere)
 (after-load 'paredit-everywhere
-  (define-key paredit-everywhere-mode-map (kbd "M-s") nil))
+  (define-key paredit-everywhere-mode-map (kbd "M-s") nil)
+  (diminish 'paredit-everywhere-mode))
 (add-hook 'prog-mode-hook 'paredit-everywhere-mode)
 
 (provide 'init-paredit)

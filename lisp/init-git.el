@@ -7,13 +7,11 @@
 
 ;; TODO: link commits from vc-log to magit-show-commit
 ;; TODO: smerge-mode
-(require-package 'git-blamed)
-(require-package 'gitignore-mode)
-(require-package 'gitconfig-mode)
-(when (maybe-require-package 'git-timemachine)
-  (global-set-key (kbd "C-x v t") 'git-timemachine-toggle))
-
-
+;; (require-package 'git-blamed)
+;; (require-package 'gitignore-mode)
+;;(require-package 'gitconfig-mode)
+;; (when (maybe-require-package 'git-timemachine)
+;;   (global-set-key (kbd "C-x v t") 'git-timemachine-toggle))
 
 (when (maybe-require-package 'magit)
   (setq-default magit-diff-refine-hunk t)
@@ -36,11 +34,10 @@
   (after-load 'vc
     (define-key vc-prefix-map (kbd "l") 'sanityinc/magit-or-vc-log-file)))
 
-
 (after-load 'magit
   (define-key magit-status-mode-map (kbd "C-M-<up>") 'magit-section-up))
 
-(maybe-require-package 'magit-todos)
+;; (maybe-require-package 'magit-todos)
 
 (require-package 'fullframe)
 (after-load 'magit
@@ -57,8 +54,8 @@
 
 
 ;; Convenient binding for vc-git-grep
-(after-load 'vc
-  (define-key vc-prefix-map (kbd "f") 'vc-git-grep))
+;; (after-load 'vc
+;;   (define-key vc-prefix-map (kbd "f") 'vc-git-grep))
 
 
 
@@ -72,29 +69,29 @@
 ;;       (magit-svn-mode)))
 ;;   (add-hook 'magit-status-mode-hook #'sanityinc/maybe-enable-magit-svn-mode))
 
-(after-load 'compile
-  (dolist (defn (list '(git-svn-updated "^\t[A-Z]\t\\(.*\\)$" 1 nil nil 0 1)
-                      '(git-svn-needs-update "^\\(.*\\): needs update$" 1 nil nil 2 1)))
-    (add-to-list 'compilation-error-regexp-alist-alist defn)
-    (add-to-list 'compilation-error-regexp-alist (car defn))))
+;; (after-load 'compile
+;;   (dolist (defn (list '(git-svn-updated "^\t[A-Z]\t\\(.*\\)$" 1 nil nil 0 1)
+;;                       '(git-svn-needs-update "^\\(.*\\): needs update$" 1 nil nil 2 1)))
+;;     (add-to-list 'compilation-error-regexp-alist-alist defn)
+;;     (add-to-list 'compilation-error-regexp-alist (car defn))))
 
-(defvar git-svn--available-commands nil "Cached list of git svn subcommands")
-(defun git-svn--available-commands ()
-  (or git-svn--available-commands
-      (setq git-svn--available-commands
-            (sanityinc/string-all-matches
-             "^  \\([a-z\\-]+\\) +"
-             (shell-command-to-string "git svn help") 1))))
+;; (defvar git-svn--available-commands nil "Cached list of git svn subcommands")
+;; (defun git-svn--available-commands ()
+;;   (or git-svn--available-commands
+;;       (setq git-svn--available-commands
+;;             (sanityinc/string-all-matches
+;;              "^  \\([a-z\\-]+\\) +"
+;;              (shell-command-to-string "git svn help") 1))))
 
-(autoload 'vc-git-root "vc-git")
+;; (autoload 'vc-git-root "vc-git")
 
-(defun git-svn (dir command)
-  "Run a git svn subcommand in DIR."
-  (interactive (list (read-directory-name "Directory: ")
-                     (completing-read "git-svn command: " (git-svn--available-commands) nil t nil nil (git-svn--available-commands))))
-  (let* ((default-directory (vc-git-root dir))
-         (compilation-buffer-name-function (lambda (major-mode-name) "*git-svn*")))
-    (compile (concat "git svn " command))))
+;; (defun git-svn (dir command)
+;;   "Run a git svn subcommand in DIR."
+;;   (interactive (list (read-directory-name "Directory: ")
+;;                      (completing-read "git-svn command: " (git-svn--available-commands) nil t nil nil (git-svn--available-commands))))
+;;   (let* ((default-directory (vc-git-root dir))
+;;          (compilation-buffer-name-function (lambda (major-mode-name) "*git-svn*")))
+;;     (compile (concat "git svn " command))))
 
 
 (provide 'init-git)

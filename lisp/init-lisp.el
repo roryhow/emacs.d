@@ -151,6 +151,10 @@
 (when (maybe-require-package 'aggressive-indent)
   (add-to-list 'sanityinc/lispy-modes-hook 'aggressive-indent-mode))
 
+(after-load 'aggressive-indent
+  (when (maybe-require-package 'diminish)
+    (diminish 'aggressive-indent-mode)))
+
 (defun sanityinc/lisp-setup ()
   "Enable features useful in any Lisp mode."
   (run-hooks 'sanityinc/lispy-modes-hook))
@@ -257,7 +261,7 @@
       (flycheck-package-setup))))
 
 
-(after-load 'elisp-mode
+(after-load 'elisp-slime-nav
   (when (maybe-require-package 'diminish)
     (diminish 'elisp-slime-nav-mode)))
 

@@ -11,7 +11,8 @@
  indent-tabs-mode nil)
 (set-face-attribute 'default nil :height 130)
 
-(setq frame-title-format nil)
+(setq frame-title-format "Emacs")
+(setq vc-handled-backends nil)
 
 (after-load 'eldoc
   (when (maybe-require-package 'diminish)
