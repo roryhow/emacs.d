@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
+(maybe-require-package 'ripgrep)
 (when (maybe-require-package 'projectile)
   (add-hook 'after-init-hook 'projectile-mode)
 
