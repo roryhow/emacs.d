@@ -4,19 +4,14 @@
 ;; You may delete these explanatory comments.
 ;;; Code:
 
-;; Set custom tab width, standard indent and use spaces rather than tabs
 (setq
  tab-width 2
  standard-indent 2
- indent-tabs-mode nil)
+ indent-tabs-mode nil
+ frame-title-format "Emacs"
+ vc-handled-backends nil
+ custom-safe-themes t)
+(load-theme 'monokai t)
 (set-face-attribute 'default nil :height 130)
-
-(setq frame-title-format "Emacs")
-(setq vc-handled-backends nil)
-
-(after-load 'eldoc
-  (when (maybe-require-package 'diminish)
-    (diminish 'eldoc-mode)))
-
 (provide 'init-local)
 ;;; init-local.el ends here

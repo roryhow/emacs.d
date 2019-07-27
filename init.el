@@ -9,11 +9,11 @@
 ;; Produce backtraces when errors occur
 ;; (setq debug-on-error t)
 
-(let ((minver "24.4"))
-  (when (version< emacs-version minver)
-    (error "Your Emacs is too old -- this config requires v%s or higher" minver)))
-(when (version< emacs-version "25.1")
-  (message "Your Emacs is old, and some functionality in this config will be disabled. Please upgrade if possible."))
+;; (let ((minver "24.4"))
+;;   (when (version< emacs-version minver)
+;;     (error "Your Emacs is too old -- this config requires v%s or higher" minver)))
+;; (when (version< emacs-version "25.1")
+;;   (message "Your Emacs is old, and some functionality in this config will be disabled. Please upgrade if possible."))
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (require 'init-benchmarking) ;; Measure startup time
@@ -35,7 +35,7 @@
 ;;----------------------------------------------------------------------------
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (require 'init-utils)
-(require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
+;;(require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
 ;; Calls (package-initialize)
 (require 'init-elpa)      ;; Machinery for installing required packages
 (require 'init-exec-path) ;; Set up $PATH
@@ -43,7 +43,7 @@
 ;;----------------------------------------------------------------------------
 ;; Allow users to provide an optional "init-preload-local.el"
 ;;----------------------------------------------------------------------------
-(require 'init-preload-local nil t)
+;; (require 'init-preload-local nil t)
 
 ;;----------------------------------------------------------------------------
 ;; Load configs for specific features and modes
@@ -62,7 +62,7 @@
 ;; (require 'init-isearch)
 ;; (require 'init-grep)
 (require 'init-uniquify)
-(require 'init-ibuffer)
+;; (require 'init-ibuffer)
 (require 'init-flycheck)
 
 (require 'init-recentf)
@@ -73,10 +73,10 @@
 (require 'init-company)
 (require 'init-windows)
 ;; (require 'init-sessions)
-(require 'init-mmm)
+;; (require 'init-mmm)
 
 (require 'init-editing-utils)
-(require 'init-whitespace)
+;; (require 'init-whitespace)
 
 ;; (require 'init-vc)
 ;; (require 'init-darcs)
@@ -95,11 +95,11 @@
 (require 'init-javascript)
 (require 'init-typescript)
 ;; (require 'init-php)
-(require 'init-latex)
-(require 'init-org)
+;; (require 'init-latex)
+;; (require 'init-org)
 ;; (require 'init-nxml)
 ;; (require 'init-html)
-(require 'init-css)
+;; (require 'init-css)
 ;; (require 'init-haml)
 (require 'init-http)
 (require 'init-python)
@@ -112,9 +112,9 @@
 ;; (require 'init-sql)
 ;; (require 'init-rust)
 ;; (require 'init-toml)
-(require 'init-yaml)
+;; (require 'init-yaml)
 ;; (require 'init-docker)
-(require 'init-terraform)
+;; (require 'init-terraform)
 ;; (require 'init-dart)
 ;; (require 'init-nix)
 ;; (maybe-require-package 'nginx-mode)
@@ -143,25 +143,25 @@
 ;; (require-package 'lua-mode)
 ;; (require-package 'htmlize)
 ;; (require-package 'dsvn)
-(when *is-a-mac*
-  (require-package 'osx-location))
-(unless (eq system-type 'windows-nt)
-  (maybe-require-package 'daemons))
+;; (when *is-a-mac*
+;;   (require-package 'osx-location))
+;; (unless (eq system-type 'windows-nt)
+;;   (maybe-require-package 'daemons))
 (maybe-require-package 'dotenv-mode)
 
-(when (maybe-require-package 'uptimes)
-  (setq-default uptimes-keep-count 200)
-  (add-hook 'after-init-hook (lambda () (require 'uptimes))))
+;; (when (maybe-require-package 'uptimes)
+;;   (setq-default uptimes-keep-count 200)
+;;   (add-hook 'after-init-hook (lambda () (require 'uptimes))))
 
 
 ;;----------------------------------------------------------------------------
 ;; Allow access from emacsclient
 ;;----------------------------------------------------------------------------
-(add-hook 'after-init-hook
-          (lambda ()
-            (require 'server)
-            (unless (server-running-p)
-              (server-start))))
+;; (add-hook 'after-init-hook
+;;           (lambda ()
+;;             (require 'server)
+;;             (unless (server-running-p)
+;;               (server-start))))
 
 ;;----------------------------------------------------------------------------
 ;; Variables configured via the interactive 'customize' interface
@@ -173,7 +173,7 @@
 ;;----------------------------------------------------------------------------
 ;; Locales (setting them earlier in this file doesn't work in X)
 ;;----------------------------------------------------------------------------
-(require 'init-locales)
+;; (require 'init-locales)
 
 
 ;;----------------------------------------------------------------------------
@@ -184,9 +184,3 @@
 
 
 (provide 'init)
-
-;; Local Variables:
-;; coding: utf-8
-;; no-byte-compile: t
-;; End:
-;;; init.el ends here
