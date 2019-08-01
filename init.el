@@ -35,7 +35,7 @@
 ;;----------------------------------------------------------------------------
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (require 'init-utils)
-;;(require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
+(require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
 ;; Calls (package-initialize)
 (require 'init-elpa)      ;; Machinery for installing required packages
 (require 'init-exec-path) ;; Set up $PATH
@@ -95,7 +95,7 @@
 (require 'init-javascript)
 (require 'init-typescript)
 ;; (require 'init-php)
-;; (require 'init-latex)
+(require 'init-latex)
 ;; (require 'init-org)
 ;; (require 'init-nxml)
 ;; (require 'init-html)
@@ -134,7 +134,7 @@
 ;; (require 'init-folding)
 ;; (require 'init-dash)
 
-;;(require 'init-twitter)
+;; (require 'init-twitter)
 ;; (require 'init-mu)
 ;; (require 'init-ledger)
 ;; Extra packages which don't require any configuration

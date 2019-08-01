@@ -11,6 +11,7 @@
  frame-title-format "Emacs"
  vc-handled-backends nil
  custom-safe-themes t)
+(require-package 'monokai-theme)
 (load-theme 'monokai t)
 (set-face-attribute 'default nil :height 130)
 (provide 'init-local)

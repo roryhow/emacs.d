@@ -21,7 +21,6 @@
   (setq-default pdf-view-display-size 'fit-page)
   (pdf-tools-install))
 
-;; Update PDF buffers after successful LaTeX runs
 (add-hook 'TeX-after-compilation-finished-functions
           #'TeX-revert-document-buffer)
 
@@ -29,8 +28,7 @@
           (lambda ()
             (company-auctex-init)
             (flyspell-mode)
-            (LaTeX-math-mode)
-            (add-hook 'after-save-hook '(TeX-command-sequence t t #'TeX-region-file))))
+            (LaTeX-math-mode)))
 (add-hook 'LaTeX-mode-hook 'visual-line-mode)
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
