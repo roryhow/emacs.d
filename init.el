@@ -62,7 +62,7 @@
 ;; (require 'init-isearch)
 ;; (require 'init-grep)
 (require 'init-uniquify)
-;; (require 'init-ibuffer)
+(require 'init-ibuffer)
 (require 'init-flycheck)
 
 (require 'init-recentf)
