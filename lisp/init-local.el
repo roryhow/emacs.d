@@ -14,5 +14,14 @@
 (require-package 'monokai-theme)
 (load-theme 'monokai t)
 (set-face-attribute 'default nil :height 130)
+(when (maybe-require-package 'emojify)
+  (add-hook 'after-init-hook #'global-emojify-mode)
+  (setq emojify-emoji-styles '(github unicode)))
+
+(when (file-directory-p "~/Documents/misc/telega.el")
+  (add-to-list 'load-path "~/Documents/misc/telega.el/")
+  (require-package 'visual-fill-column)
+  (require 'telega))
+
 (provide 'init-local)
 ;;; init-local.el ends here

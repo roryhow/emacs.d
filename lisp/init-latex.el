@@ -26,7 +26,6 @@
 
 (add-hook 'LaTeX-mode-hook
           (lambda ()
-            (setq company-idle-delay 0.1)
             (company-auctex-init)
             (flyspell-mode)
             (LaTeX-math-mode)))
