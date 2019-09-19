@@ -50,8 +50,6 @@
 (add-hook 'web-mode-hook #'my-web-mode-hook)
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
-(setq tide-format-options '(:indentSize 0 :tabSize 0))
 (setq typescript-indent-level 2)
-
 (provide 'init-typescript)
 ;;; init-typescript.el ends here
