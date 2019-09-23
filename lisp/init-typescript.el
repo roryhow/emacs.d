@@ -44,6 +44,7 @@
   (setq web-mode-enable-auto-indentation nil)
   (setq web-mode-enable-auto-quoting nil)
   (setq web-mode-code-indent-offset 2)
+  (prettier-js-mode) ;; TODO check if prettier is enabled in repo?
   (when (string-equal "tsx" (file-name-extension buffer-file-name))
     (setup-tide-mode)))
 
