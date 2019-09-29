@@ -20,13 +20,5 @@
   (add-hook 'after-init-hook #'global-emojify-mode)
   (setq emojify-emoji-styles '(github unicode)))
 
-(when (file-directory-p "~/Documents/misc/telega.el")
-  (add-to-list 'load-path "~/Documents/misc/telega.el/")
-  (require-package 'visual-fill-column)
-  (setq telega-use-notifications t)
-  (add-hook 'telega-chat-mode-hook
-            (lambda () (setq company-backends '(telega-company-emoji))))
-  (require 'telega))
-
 (provide 'init-local)
 ;;; init-local.el ends here
