@@ -33,6 +33,7 @@
   (flycheck-mode +1)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode +1)
+  (prettier-js-mode)
   (tide-hl-identifier-mode +1)
   (add-hook 'flycheck-mode-hook #'my/use-tslint-from-node-modules)
   (company-mode +1))
@@ -44,7 +45,6 @@
   (setq web-mode-enable-auto-indentation nil)
   (setq web-mode-enable-auto-quoting nil)
   (setq web-mode-code-indent-offset 2)
-  (prettier-js-mode) ;; TODO check if prettier is enabled in repo?
   (when (string-equal "tsx" (file-name-extension buffer-file-name))
     (setup-tide-mode)))
 
