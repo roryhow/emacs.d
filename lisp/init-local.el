@@ -16,9 +16,6 @@
 (require-package 'monokai-theme)
 (load-theme 'monokai t)
 (set-face-attribute 'default nil :height 130)
-(when (maybe-require-package 'emojify)
-  (add-hook 'after-init-hook #'global-emojify-mode)
-  (setq emojify-emoji-styles '(github unicode)))
 
 (provide 'init-local)
 ;;; init-local.el ends here
