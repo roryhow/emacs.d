@@ -112,7 +112,7 @@
 ;; (require 'init-sql)
 ;; (require 'init-rust)
 ;; (require 'init-toml)
-;; (require 'init-yaml)
+(require 'init-yaml)
 ;; (require 'init-docker)
 ;; (require 'init-terraform)
 ;; (require 'init-dart)
