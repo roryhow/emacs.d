@@ -17,5 +17,7 @@
 (load-theme 'monokai t)
 (set-face-attribute 'default nil :height 130)
 
+(maybe-require-package 'direnv)
+
 (provide 'init-local)
 ;;; init-local.el ends here
