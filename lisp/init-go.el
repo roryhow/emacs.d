@@ -45,6 +45,7 @@
 
 ;; Connect go-mode-hook with the function we just defined
 (add-hook 'go-mode-hook 'my-go-mode-hook)
+(add-hook 'go-mode-hook 'lsp)
 
 (provide 'init-go)
 ;;; init-go.el ends here

@@ -4,9 +4,6 @@
 
 (maybe-require-package 'scala-mode)
 (maybe-require-package 'sbt-mode)
-(maybe-require-package 'lsp-mode)
-(maybe-require-package 'lsp-ui)
-(maybe-require-package 'company-lsp)
 
 ;; use scala-mode for scala files
 ;; double check if sbt-mode actually gets used here
@@ -20,7 +17,9 @@
 
 (after-load 'scala-mode
   (setq lsp-prefer-flymake nil)
-  (add-hook 'scala-mode-hook 'lsp))
+  ;; hook lsp into scala (requires metals)
+  (when (maybe-require-package 'lsp-mode)
+    (add-hook 'scala-mode-hook 'lsp)))
 
 (provide 'init-scala)
 ;;; init-scala ends here
