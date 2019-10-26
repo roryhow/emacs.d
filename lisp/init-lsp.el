@@ -8,6 +8,7 @@
 
 (setq lsp-enable-snippet nil)
 
-(push 'company-lsp company-backends)
+(after-load 'company-mode (push 'company-lsp company-backends))
 
+(provide 'init-lsp)
 ;;; init-lsp ends here
