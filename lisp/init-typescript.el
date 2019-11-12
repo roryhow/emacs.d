@@ -33,6 +33,7 @@
   (flycheck-mode +1)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode +1)
+  (diminish 'eldoc-mode)
   (prettier-js-mode)
   (tide-hl-identifier-mode +1)
   (add-hook 'flycheck-mode-hook #'my/use-tslint-from-node-modules)
