@@ -5,10 +5,13 @@
 (maybe-require-package 'lsp-mode)
 (maybe-require-package 'lsp-ui)
 (maybe-require-package 'company-lsp)
-
-(setq lsp-enable-snippet nil)
+(maybe-require-package 'yasnippet)
 
 (after-load 'company-mode (push 'company-lsp company-backends))
+(after-load 'lsp-mode
+  (yas-minor-mode-on))
+
+(setq lsp-file-watch-threshold 5000)
 
 (provide 'init-lsp)
 ;;; init-lsp ends here

@@ -105,7 +105,7 @@
 (require 'init-http)
 (require 'init-python)
 ;; (require 'init-haskell)
-;; (require 'init-elm)
+(require 'init-elm)
 (require 'init-scala)
 ;; (require 'init-purescript)
 ;; (require 'init-ruby)

@@ -19,7 +19,8 @@
   (setq lsp-prefer-flymake nil)
   ;; hook lsp into scala (requires metals)
   (when (maybe-require-package 'lsp-mode)
-    (add-hook 'scala-mode-hook 'lsp)))
+    (add-hook 'scala-mode-hook 'lsp))
+  (add-hook 'before-save-hook #'lsp-format-buffer nil t))
 
 (provide 'init-scala)
 ;;; init-scala ends here
