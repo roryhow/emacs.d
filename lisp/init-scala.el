@@ -20,7 +20,7 @@
   ;; hook lsp into scala (requires metals)
   (when (maybe-require-package 'lsp-mode)
     (add-hook 'scala-mode-hook 'lsp))
-  (add-hook 'before-save-hook #'lsp-format-buffer nil t))
+  (add-hook 'before-save-hook #'lsp-format-buffer))
 
 (provide 'init-scala)
 ;;; init-scala ends here
