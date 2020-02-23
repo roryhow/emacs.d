@@ -68,7 +68,6 @@
 (require 'init-recentf)
 (require 'init-smex)
 (require 'init-ivy)
-;;(require 'init-helm)
 ;; (require 'init-hippie-expand)
 (require 'init-company)
 (require 'init-lsp)
@@ -116,7 +115,6 @@
 (require 'init-yaml)
 ;; (require 'init-docker)
 ;; (require 'init-terraform)
-;; (require 'init-dart)
 ;; (require 'init-nix)
 ;; (maybe-require-package 'nginx-mode)
 
