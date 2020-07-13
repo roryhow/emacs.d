@@ -3,7 +3,7 @@
 ;;; Code:
 
 (maybe-require-package 'elpy)
-(after-load 'python
+(with-eval-after-load 'python
   (setq elpy-rpc-python-command "python3")
   (elpy-enable))
 

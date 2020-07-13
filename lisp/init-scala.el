@@ -9,13 +9,13 @@
 ;; double check if sbt-mode actually gets used here
 (add-to-list 'auto-mode-alist '("\\.s\\(cala\\|bt\\)$" . scala-mode))
 
-(after-load 'sbt-mode
+(with-eval-after-load 'sbt-mode
   (substitute-key-definition
    'minibuffer-complete-word
    'self-insert-command
    minibuffer-local-completion-map))
 
-(after-load 'scala-mode
+(with-eval-after-load 'scala-mode
   (setq lsp-prefer-flymake nil)
   ;; hook lsp into scala (requires metals)
   (when (maybe-require-package 'lsp-mode)

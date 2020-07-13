@@ -171,7 +171,7 @@ there is no current file, eval the current buffer."
 (when (maybe-require-package 'aggressive-indent)
   (add-to-list 'sanityinc/lispy-modes-hook 'aggressive-indent-mode))
 
-(after-load 'aggressive-indent
+(with-eval-after-load 'aggressive-indent
   (when (maybe-require-package 'diminish)
     (diminish 'aggressive-indent-mode)))
 
@@ -281,7 +281,7 @@ there is no current file, eval the current buffer."
       (flycheck-package-setup))))
 
 
-(after-load 'elisp-slime-nav
+(with-eval-after-load 'elisp-slime-nav
   (when (maybe-require-package 'diminish)
     (diminish 'elisp-slime-nav-mode)))
 

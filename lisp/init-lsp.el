@@ -7,8 +7,8 @@
 (maybe-require-package 'company-lsp)
 (maybe-require-package 'yasnippet)
 
-(after-load 'company-mode (push 'company-lsp company-backends))
-(after-load 'lsp-mode
+(with-eval-after-load 'company-mode (push 'company-lsp company-backends))
+(with-eval-after-load 'lsp-mode
   (yas-minor-mode-on))
 
 (setq lsp-file-watch-threshold 5000)

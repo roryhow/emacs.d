@@ -9,7 +9,7 @@
   (when (maybe-require-package 'flycheck-color-mode-line)
     (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
 
-  (after-load 'flycheck
+  (with-eval-after-load 'flycheck
     (when (maybe-require-package 'diminish)
       (diminish 'flycheck-mode))))
 
