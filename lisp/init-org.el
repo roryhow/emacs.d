@@ -392,5 +392,15 @@ typical word processor."
 (eval-after-load "org"
   '(require 'ox-md nil t))
 
+
+;; Org-Roam configuration
+
+;; (maybe-require-package 'org-roam)
+
+;; (with-eval-after-load 'org-roam
+;;   (setq org-roam-directory "~/Docuemnts/roam"))
+
+;; (add-hook 'after-init-hook 'org-roam-mode)
+
 (provide 'init-org)
 ;;; init-org.el ends here
