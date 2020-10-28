@@ -5,7 +5,7 @@
 (when (maybe-require-package 'ivy)
   (add-hook 'after-init-hook 'ivy-mode)
   (with-eval-after-load 'ivy
-    (setq-default ivy-use-virtual-buffers nil
+    (setq-default ivy-use-virtual-buffers t
                   ivy-virtual-abbreviate 'fullpath
                   ivy-count-format ""
                   projectile-completion-system 'ivy
@@ -26,7 +26,8 @@
     (when (maybe-require-package 'diminish)
       (diminish 'ivy-mode)))
 
-  ;; ivy-rich introduces massive performance hit
+  ;; ivy-rich introduces a massive performance hit when switching buffers
+  ;; see https://github.com/Yevgnen/ivy-rich/issues/87 for more info 
   ;; (when (maybe-require-package 'ivy-rich)
   ;;   (setq ivy-virtual-abbreviate 'abbreviate
   ;;         ivy-rich-switch-buffer-align-virtual-buffer nil
