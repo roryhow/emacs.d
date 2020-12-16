@@ -16,6 +16,8 @@
     (diminish 'company-mode)
     (setq company-idle-delay 0.3)
     (define-key company-mode-map (kbd "M-/") 'company-complete)
+    (define-key company-mode-map [remap completion-at-point] 'company-complete)
+    (define-key company-mode-map [remap indent-for-tab-command] 'company-indent-or-complete-common)
     (define-key company-active-map (kbd "M-/") 'company-other-backend)
     (define-key company-active-map (kbd "C-n") 'company-select-next)
     (define-key company-active-map (kbd "C-p") 'company-select-previous)
