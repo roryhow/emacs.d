@@ -51,7 +51,9 @@
       org-tags-column 80
       org-startup-truncated nil
       org-startup-with-inline-images t
-      org-startup-with-latex-preview t)
+      org-startup-with-latex-preview t
+      org-adapt-indentation nil)
+
 
 
 ;; Lots of stuff from http://doc.norang.ca/org-mode.html
@@ -64,107 +66,107 @@
 
 
 
-(maybe-require-package 'writeroom-mode)
+;; (maybe-require-package 'writeroom-mode)
 
-(define-minor-mode prose-mode
-  "Set up a buffer for prose editing.
-This enables or modifies a number of settings so that the
-experience of editing prose is a little more like that of a
-typical word processor."
-  nil " Prose" nil
-  (if prose-mode
-      (progn
-        (when (fboundp 'writeroom-mode)
-          (writeroom-mode 1))
-        (setq truncate-lines nil)
-        (setq word-wrap t)
-        (setq cursor-type 'bar)
-        (when (eq major-mode 'org)
-          (kill-local-variable 'buffer-face-mode-face))
-        (buffer-face-mode 1)
-        ;;(delete-selection-mode 1)
-        (setq-local blink-cursor-interval 0.6)
-        (setq-local show-trailing-whitespace nil)
-        (setq-local line-spacing 0.2)
-        (setq-local electric-pair-mode nil)
-        (ignore-errors (flyspell-mode 1))
-        (visual-line-mode 1))
-    (kill-local-variable 'truncate-lines)
-    (kill-local-variable 'word-wrap)
-    (kill-local-variable 'cursor-type)
-    (kill-local-variable 'blink-cursor-interval)
-    (kill-local-variable 'show-trailing-whitespace)
-    (kill-local-variable 'line-spacing)
-    (kill-local-variable 'electric-pair-mode)
-    (buffer-face-mode -1)
-    ;; (delete-selection-mode -1)
-    (flyspell-mode -1)
-    (visual-line-mode -1)
-    (when (fboundp 'writeroom-mode)
-      (writeroom-mode 0))))
+;; (define-minor-mode prose-mode
+;;   "Set up a buffer for prose editing.
+;; This enables or modifies a number of settings so that the
+;; experience of editing prose is a little more like that of a
+;; typical word processor."
+;;   nil " Prose" nil
+;;   (if prose-mode
+;;       (progn
+;;         (when (fboundp 'writeroom-mode)
+;;           (writeroom-mode 1))
+;;         (setq truncate-lines nil)
+;;         (setq word-wrap t)
+;;         (setq cursor-type 'bar)
+;;         (when (eq major-mode 'org)
+;;           (kill-local-variable 'buffer-face-mode-face))
+;;         (buffer-face-mode 1)
+;;         ;;(delete-selection-mode 1)
+;;         (setq-local blink-cursor-interval 0.6)
+;;         (setq-local show-trailing-whitespace nil)
+;;         (setq-local line-spacing 0.2)
+;;         (setq-local electric-pair-mode nil)
+;;         (ignore-errors (flyspell-mode 1))
+;;         (visual-line-mode 1))
+;;     (kill-local-variable 'truncate-lines)
+;;     (kill-local-variable 'word-wrap)
+;;     (kill-local-variable 'cursor-type)
+;;     (kill-local-variable 'blink-cursor-interval)
+;;     (kill-local-variable 'show-trailing-whitespace)
+;;     (kill-local-variable 'line-spacing)
+;;     (kill-local-variable 'electric-pair-mode)
+;;     (buffer-face-mode -1)
+;;     ;; (delete-selection-mode -1)
+;;     (flyspell-mode -1)
+;;     (visual-line-mode -1)
+;;     (when (fboundp 'writeroom-mode)
+;;       (writeroom-mode 0))))
 
-;;(add-hook 'org-mode-hook 'buffer-face-mode)
+;; ;;(add-hook 'org-mode-hook 'buffer-face-mode)
 
 
-(setq org-support-shift-select t)
+;; (setq org-support-shift-select t)
 
 ;;; Capturing
 
-(global-set-key (kbd "C-c c") 'org-capture)
+;; (global-set-key (kbd "C-c c") 'org-capture)
 
-(setq org-capture-templates
-      `(("h" "Home TODO" entry (file+headline "~/Documents/org/home.org" "Tasks")
-         "* TODO %?\n%U\n" :clock-resume t)
-        ("w" "Work TODO" entry (file+headline "~/Documents/org/work.org" "Tasks")
-         "* TODO %?\n%U\n" :clock-resume t)
-        ("u" "Uni TODO" entry (file+headline "~/Documents/org/uni.org" "Tasks")
-         "* TODO %?\n%U\n" :clock-resume t)
-        ("H" "Home note" entry (file+headline "~/Documents/org/home.org" "Notes")
-         "* %? :NOTE:\n%U\n%a\n" :clock-resume t)
-        ("W" "Work note" entry (file+headline "~/Documents/org/work.org" "Notes")
-         "* %? :NOTE:\n%U\n%a\n" :clock-resume t)
-        ("U" "Uni note" entry (file+headline "~/Documents/org/uni.org" "Notes")
-         "* %? :NOTE:\n%U\n%a\n" :clock-resume t)))
+;; (setq org-capture-templates
+;;       `(("h" "Home TODO" entry (file+headline "~/Documents/org/home.org" "Tasks")
+;;          "* TODO %?\n%U\n" :clock-resume t)
+;;         ("w" "Work TODO" entry (file+headline "~/Documents/org/work.org" "Tasks")
+;;          "* TODO %?\n%U\n" :clock-resume t)
+;;         ("u" "Uni TODO" entry (file+headline "~/Documents/org/uni.org" "Tasks")
+;;          "* TODO %?\n%U\n" :clock-resume t)
+;;         ("H" "Home note" entry (file+headline "~/Documents/org/home.org" "Notes")
+;;          "* %? :NOTE:\n%U\n%a\n" :clock-resume t)
+;;         ("W" "Work note" entry (file+headline "~/Documents/org/work.org" "Notes")
+;;          "* %? :NOTE:\n%U\n%a\n" :clock-resume t)
+;;         ("U" "Uni note" entry (file+headline "~/Documents/org/uni.org" "Notes")
+;;          "* %? :NOTE:\n%U\n%a\n" :clock-resume t)))
 
 
 
 ;;; Refiling
 
-(setq org-refile-use-cache nil)
+;; (setq org-refile-use-cache nil)
 
-;; Targets include this file and any file contributing to the agenda - up to 5 levels deep
-(setq org-refile-targets '((nil :maxlevel . 5) (org-agenda-files :maxlevel . 5)))
+;; ;; Targets include this file and any file contributing to the agenda - up to 5 levels deep
+;; (setq org-refile-targets '((nil :maxlevel . 5) (org-agenda-files :maxlevel . 5)))
 
-(with-eval-after-load 'org-agenda
-  (add-to-list 'org-agenda-after-show-hook 'org-show-entry))
+;; (with-eval-after-load 'org-agenda
+;;   (add-to-list 'org-agenda-after-show-hook 'org-show-entry))
 
-(advice-add 'org-refile :after (lambda (&rest _) (org-save-all-org-buffers)))
+;; (advice-add 'org-refile :after (lambda (&rest _) (org-save-all-org-buffers)))
 
-;; Exclude DONE state tasks from refile targets
-(defun sanityinc/verify-refile-target ()
-  "Exclude todo keywords with a done state from refile targets."
-  (not (member (nth 2 (org-heading-components)) org-done-keywords)))
-(setq org-refile-target-verify-function 'sanityinc/verify-refile-target)
+;; ;; Exclude DONE state tasks from refile targets
+;; (defun sanityinc/verify-refile-target ()
+;;   "Exclude todo keywords with a done state from refile targets."
+;;   (not (member (nth 2 (org-heading-components)) org-done-keywords)))
+;; (setq org-refile-target-verify-function 'sanityinc/verify-refile-target)
 
-(defun sanityinc/org-refile-anywhere (&optional goto default-buffer rfloc msg)
-  "A version of `org-refile' which allows refiling to any subtree."
-  (interactive "P")
-  (let ((org-refile-target-verify-function))
-    (org-refile goto default-buffer rfloc msg)))
+;; (defun sanityinc/org-refile-anywhere (&optional goto default-buffer rfloc msg)
+;;   "A version of `org-refile' which allows refiling to any subtree."
+;;   (interactive "P")
+;;   (let ((org-refile-target-verify-function))
+;;     (org-refile goto default-buffer rfloc msg)))
 
-(defun sanityinc/org-agenda-refile-anywhere (&optional goto rfloc no-update)
-  "A version of `org-agenda-refile' which allows refiling to any subtree."
-  (interactive "P")
-  (let ((org-refile-target-verify-function))
-    (org-agenda-refile goto rfloc no-update)))
+;; (defun sanityinc/org-agenda-refile-anywhere (&optional goto rfloc no-update)
+;;   "A version of `org-agenda-refile' which allows refiling to any subtree."
+;;   (interactive "P")
+;;   (let ((org-refile-target-verify-function))
+;;     (org-agenda-refile goto rfloc no-update)))
 
-;; Targets start with the file name - allows creating level 1 tasks
-;;(setq org-refile-use-outline-path (quote file))
-(setq org-refile-use-outline-path t)
-(setq org-outline-path-complete-in-steps nil)
+;; ;; Targets start with the file name - allows creating level 1 tasks
+;; ;;(setq org-refile-use-outline-path (quote file))
+;; (setq org-refile-use-outline-path t)
+;; (setq org-outline-path-complete-in-steps nil)
 
-;; Allow refile to create parent tasks with confirmation
-(setq org-refile-allow-creating-parent-nodes 'confirm)
+;; ;; Allow refile to create parent tasks with confirmation
+;; (setq org-refile-allow-creating-parent-nodes 'confirm)
 
 
 ;;; To-do settings
@@ -183,114 +185,114 @@ typical word processor."
 
 ;;; Agenda views
 
-(setq-default org-agenda-clockreport-parameter-plist '(:link t :maxlevel 3))
+;; (setq-default org-agenda-clockreport-parameter-plist '(:link t :maxlevel 3))
 
 
-(let ((active-project-match "-INBOX/PROJECT"))
+;; (let ((active-project-match "-INBOX/PROJECT"))
 
-  (setq org-stuck-projects
-        `(,active-project-match ("NEXT")))
+;;   (setq org-stuck-projects
+;;         `(,active-project-match ("NEXT")))
 
-  (setq org-agenda-compact-blocks t
-        org-agenda-sticky t
-        org-agenda-start-on-weekday nil
-        org-agenda-span 'day
-        org-agenda-include-diary nil
-        org-agenda-sorting-strategy
-        '((agenda habit-down time-up user-defined-up effort-up category-keep)
-          (todo category-up effort-up)
-          (tags category-up effort-up)
-          (search category-up))
-        org-agenda-window-setup 'current-window
-        org-agenda-custom-commands
-        `(("N" "Notes" tags "NOTE"
-           ((org-agenda-overriding-header "Notes")
-            (org-tags-match-list-sublevels t)))
-          ("g" "GTD"
-           ((agenda "" nil)
-            (tags "INBOX"
-                  ((org-agenda-overriding-header "Inbox")
-                   (org-tags-match-list-sublevels nil)))
-            (stuck ""
-                   ((org-agenda-overriding-header "Stuck Projects")
-                    (org-agenda-tags-todo-honor-ignore-options t)
-                    (org-tags-match-list-sublevels t)
-                    (org-agenda-todo-ignore-scheduled 'future)))
-            (tags-todo "-INBOX"
-                       ((org-agenda-overriding-header "Next Actions")
-                        (org-agenda-tags-todo-honor-ignore-options t)
-                        (org-agenda-todo-ignore-scheduled 'future)
-                        (org-agenda-skip-function
-                         '(lambda ()
-                            (or (org-agenda-skip-subtree-if 'todo '("HOLD" "WAITING"))
-                                (org-agenda-skip-entry-if 'nottodo '("NEXT")))))
-                        (org-tags-match-list-sublevels t)
-                        (org-agenda-sorting-strategy
-                         '(todo-state-down effort-up category-keep))))
-            (tags-todo ,active-project-match
-                       ((org-agenda-overriding-header "Projects")
-                        (org-tags-match-list-sublevels t)
-                        (org-agenda-sorting-strategy
-                         '(category-keep))))
-            (tags-todo "-INBOX/-NEXT"
-                       ((org-agenda-overriding-header "Orphaned Tasks")
-                        (org-agenda-tags-todo-honor-ignore-options t)
-                        (org-agenda-todo-ignore-scheduled 'future)
-                        (org-agenda-skip-function
-                         '(lambda ()
-                            (or (org-agenda-skip-subtree-if 'todo '("PROJECT" "HOLD" "WAITING" "DELEGATED"))
-                                (org-agenda-skip-subtree-if 'nottododo '("TODO")))))
-                        (org-tags-match-list-sublevels t)
-                        (org-agenda-sorting-strategy
-                         '(category-keep))))
-            (tags-todo "/WAITING"
-                       ((org-agenda-overriding-header "Waiting")
-                        (org-agenda-tags-todo-honor-ignore-options t)
-                        (org-agenda-todo-ignore-scheduled 'future)
-                        (org-agenda-sorting-strategy
-                         '(category-keep))))
-            (tags-todo "/DELEGATED"
-                       ((org-agenda-overriding-header "Delegated")
-                        (org-agenda-tags-todo-honor-ignore-options t)
-                        (org-agenda-todo-ignore-scheduled 'future)
-                        (org-agenda-sorting-strategy
-                         '(category-keep))))
-            (tags-todo "-INBOX"
-                       ((org-agenda-overriding-header "On Hold")
-                        (org-agenda-skip-function
-                         '(lambda ()
-                            (or (org-agenda-skip-subtree-if 'todo '("WAITING"))
-                                (org-agenda-skip-entry-if 'nottodo '("HOLD")))))
-                        (org-tags-match-list-sublevels nil)
-                        (org-agenda-sorting-strategy
-                         '(category-keep))))
-            ;; (tags-todo "-NEXT"
-            ;;            ((org-agenda-overriding-header "All other TODOs")
-            ;;             (org-match-list-sublevels t)))
-            )))))
+;;   (setq org-agenda-compact-blocks t
+;;         org-agenda-sticky t
+;;         org-agenda-start-on-weekday nil
+;;         org-agenda-span 'day
+;;         org-agenda-include-diary nil
+;;         org-agenda-sorting-strategy
+;;         '((agenda habit-down time-up user-defined-up effort-up category-keep)
+;;           (todo category-up effort-up)
+;;           (tags category-up effort-up)
+;;           (search category-up))
+;;         org-agenda-window-setup 'current-window
+;;         org-agenda-custom-commands
+;;         `(("N" "Notes" tags "NOTE"
+;;            ((org-agenda-overriding-header "Notes")
+;;             (org-tags-match-list-sublevels t)))
+;;           ("g" "GTD"
+;;            ((agenda "" nil)
+;;             (tags "INBOX"
+;;                   ((org-agenda-overriding-header "Inbox")
+;;                    (org-tags-match-list-sublevels nil)))
+;;             (stuck ""
+;;                    ((org-agenda-overriding-header "Stuck Projects")
+;;                     (org-agenda-tags-todo-honor-ignore-options t)
+;;                     (org-tags-match-list-sublevels t)
+;;                     (org-agenda-todo-ignore-scheduled 'future)))
+;;             (tags-todo "-INBOX"
+;;                        ((org-agenda-overriding-header "Next Actions")
+;;                         (org-agenda-tags-todo-honor-ignore-options t)
+;;                         (org-agenda-todo-ignore-scheduled 'future)
+;;                         (org-agenda-skip-function
+;;                          '(lambda ()
+;;                             (or (org-agenda-skip-subtree-if 'todo '("HOLD" "WAITING"))
+;;                                 (org-agenda-skip-entry-if 'nottodo '("NEXT")))))
+;;                         (org-tags-match-list-sublevels t)
+;;                         (org-agenda-sorting-strategy
+;;                          '(todo-state-down effort-up category-keep))))
+;;             (tags-todo ,active-project-match
+;;                        ((org-agenda-overriding-header "Projects")
+;;                         (org-tags-match-list-sublevels t)
+;;                         (org-agenda-sorting-strategy
+;;                          '(category-keep))))
+;;             (tags-todo "-INBOX/-NEXT"
+;;                        ((org-agenda-overriding-header "Orphaned Tasks")
+;;                         (org-agenda-tags-todo-honor-ignore-options t)
+;;                         (org-agenda-todo-ignore-scheduled 'future)
+;;                         (org-agenda-skip-function
+;;                          '(lambda ()
+;;                             (or (org-agenda-skip-subtree-if 'todo '("PROJECT" "HOLD" "WAITING" "DELEGATED"))
+;;                                 (org-agenda-skip-subtree-if 'nottododo '("TODO")))))
+;;                         (org-tags-match-list-sublevels t)
+;;                         (org-agenda-sorting-strategy
+;;                          '(category-keep))))
+;;             (tags-todo "/WAITING"
+;;                        ((org-agenda-overriding-header "Waiting")
+;;                         (org-agenda-tags-todo-honor-ignore-options t)
+;;                         (org-agenda-todo-ignore-scheduled 'future)
+;;                         (org-agenda-sorting-strategy
+;;                          '(category-keep))))
+;;             (tags-todo "/DELEGATED"
+;;                        ((org-agenda-overriding-header "Delegated")
+;;                         (org-agenda-tags-todo-honor-ignore-options t)
+;;                         (org-agenda-todo-ignore-scheduled 'future)
+;;                         (org-agenda-sorting-strategy
+;;                          '(category-keep))))
+;;             (tags-todo "-INBOX"
+;;                        ((org-agenda-overriding-header "On Hold")
+;;                         (org-agenda-skip-function
+;;                          '(lambda ()
+;;                             (or (org-agenda-skip-subtree-if 'todo '("WAITING"))
+;;                                 (org-agenda-skip-entry-if 'nottodo '("HOLD")))))
+;;                         (org-tags-match-list-sublevels nil)
+;;                         (org-agenda-sorting-strategy
+;;                          '(category-keep))))
+;;             ;; (tags-todo "-NEXT"
+;;             ;;            ((org-agenda-overriding-header "All other TODOs")
+;;             ;;             (org-match-list-sublevels t)))
+;;             )))))
 
 
-(add-hook 'org-agenda-mode-hook 'hl-line-mode)
+;; (add-hook 'org-agenda-mode-hook 'hl-line-mode)
 
 
 ;;; Org clock
 
 ;; Save the running clock and all clock history when exiting Emacs, load it on startup
-(with-eval-after-load 'org
-  (org-clock-persistence-insinuate))
-(setq org-clock-persist t)
-(setq org-clock-in-resume t)
+;; (with-eval-after-load 'org
+;;   (org-clock-persistence-insinuate))
+;; (setq org-clock-persist t)
+;; (setq org-clock-in-resume t)
 
-;; Save clock data and notes in the LOGBOOK drawer
-(setq org-clock-into-drawer t)
-;; Save state changes in the LOGBOOK drawer
-(setq org-log-into-drawer t)
-;; Removes clocked tasks with 0:00 duration
-(setq org-clock-out-remove-zero-time-clocks t)
+;; ;; Save clock data and notes in the LOGBOOK drawer
+;; (setq org-clock-into-drawer t)
+;; ;; Save state changes in the LOGBOOK drawer
+;; (setq org-log-into-drawer t)
+;; ;; Removes clocked tasks with 0:00 duration
+;; (setq org-clock-out-remove-zero-time-clocks t)
 
-;; Show clock sums as hours and minutes, not "n days" etc.
-(setq org-time-clocksum-format
-      '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
+;; ;; Show clock sums as hours and minutes, not "n days" etc.
+;; (setq org-time-clocksum-format
+;;       '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
 
 
 
@@ -335,10 +337,10 @@ typical word processor."
 
 
 
-(require-package 'org-pomodoro)
-(setq org-pomodoro-keep-killed-pomodoro-time t)
-(with-eval-after-load 'org-agenda
-  (define-key org-agenda-mode-map (kbd "P") 'org-pomodoro))
+;; (require-package 'org-pomodoro)
+;; (setq org-pomodoro-keep-killed-pomodoro-time t)
+;; (with-eval-after-load 'org-agenda
+;;   (define-key org-agenda-mode-map (kbd "P") 'org-pomodoro))
 
 
 ;; ;; Show iCal calendars in the org agenda
@@ -393,14 +395,20 @@ typical word processor."
   '(require 'ox-md nil t))
 
 
+
 ;; Org-Roam configuration
 
-;; (maybe-require-package 'org-roam)
+(maybe-require-package 'org-roam)
+(add-hook 'after-init-hook 'org-roam-mode)
+(with-eval-after-load 'org-roam
+  (setq org-roam-directory "~/Documents/roam")
+  (define-key org-roam-mode-map (kbd "C-c n l") 'org-roam)
+  (define-key org-roam-mode-map (kbd "C-c n f") 'org-roam-find-file)
+  (define-key org-roam-mode-map (kbd "C-c n g") 'org-roam-graph))
 
-;; (with-eval-after-load 'org-roam
-;;   (setq org-roam-directory "~/Docuemnts/roam"))
-
-;; (add-hook 'after-init-hook 'org-roam-mode)
+(with-eval-after-load 'org
+  (define-key org-mode-map (kbd "C-c n i") 'org-roam-insert)
+  (define-key org-mode-map (kbd "C-c n I") 'org-roam-insert-immediate))
 
 (provide 'init-org)
 ;;; init-org.el ends here
