@@ -4,10 +4,8 @@
 
 (maybe-require-package 'lsp-mode)
 (maybe-require-package 'lsp-ui)
-(maybe-require-package 'company-lsp)
 (maybe-require-package 'yasnippet)
 
-(with-eval-after-load 'company-mode (push 'company-lsp company-backends))
 (with-eval-after-load 'lsp-mode
   (yas-minor-mode-on))
 
