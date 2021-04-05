@@ -9,7 +9,10 @@
 (with-eval-after-load 'lsp-mode
   (yas-minor-mode-on))
 
-(setq lsp-file-watch-threshold 5000)
+(setq
+ lsp-file-watch-threshold 5000
+ lsp-prefer-capf t
+ lsp-headerline-breadcrumb-mode nil)
 
 (provide 'init-lsp)
 ;;; init-lsp ends here
