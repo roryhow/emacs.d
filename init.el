@@ -67,7 +67,7 @@
 
 (require 'init-recentf)
 (require 'init-selectrum)
-(require 'init-hippie-expand)
+;; (require 'init-hippie-expand)
 (require 'init-company)
 (require 'init-lsp)
 (require 'init-windows)

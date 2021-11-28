@@ -11,7 +11,8 @@
         httprepl-content-type-middleware-alist))
 
 
-(when (maybe-require-package 'restclient)
+(when (require 'restclient)
+  (require 'restclient-jq)
   (add-auto-mode 'restclient-mode "\\.rest\\'")
   (add-auto-mode 'restclient-mode "\\.http\\'")
 
