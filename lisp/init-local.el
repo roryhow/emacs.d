@@ -16,7 +16,7 @@
 (when *is-a-mac* (menu-bar-mode t)) ;; Required for correct CMD+tab functionality on Mac
 (require-package 'monokai-theme)
 (load-theme 'monokai t)
-(set-face-attribute 'default nil :height 130)
+(set-face-attribute 'default nil :height 140)
 
 (maybe-require-package 'direnv)
 
