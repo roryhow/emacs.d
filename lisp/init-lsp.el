@@ -3,10 +3,7 @@
 ;;; Code:
 
 (maybe-require-package 'lsp-mode)
-;; (maybe-require-package 'lsp-ui)
-
-(with-eval-after-load 'lsp-mode
-  (yas-minor-mode-on))
+(maybe-require-package 'lsp-ui)
 
 (setq
  lsp-file-watch-threshold 5000

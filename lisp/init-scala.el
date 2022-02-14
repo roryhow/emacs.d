@@ -17,6 +17,7 @@
 
 (with-eval-after-load 'scala-mode
   (setq lsp-prefer-flymake nil)
+  (require-package 'lsp-metals)
   ;; hook lsp into scala (requires metals)
   (when (maybe-require-package 'lsp-mode)
     (add-hook 'scala-mode-hook 'lsp))
