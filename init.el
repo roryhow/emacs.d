@@ -48,18 +48,18 @@
 ;; Load configs for specific features and modes
 ;;----------------------------------------------------------------------------
 
-;; (require-package 'diminish)
-;; (maybe-require-package 'scratch)
-;; (require-package 'command-log-mode)
+(require-package 'diminish)
+(maybe-require-package 'scratch)
+(require-package 'command-log-mode)
 
-;; (require 'init-frame-hooks)
+(require 'init-frame-hooks)
 ;; (require 'init-xterm)
 ;; (require 'init-themes)
 (require 'init-osx-keys)
 (require 'init-gui-frames)
-;; (require 'init-dired)
+(require 'init-dired)
 ;; (require 'init-isearch)
-;; (require 'init-grep)
+(require 'init-grep)
 (require 'init-uniquify)
 (require 'init-ibuffer)
 (require 'init-flycheck)
@@ -79,7 +79,7 @@
 ;; (require 'init-vc)
 ;; (require 'init-darcs)
 (require 'init-git)
-;; (require 'init-github)
+(require 'init-github)
 (require 'init-go)
 
 (require 'init-projectile)
@@ -92,7 +92,7 @@
 ;; (require 'init-erlang)
 (require 'init-javascript)
 (require 'init-typescript)
-(require 'init-php)
+;; (require 'init-php)
 ;; (require 'init-latex)
 (require 'init-org)
 ;; (require 'init-nxml)
@@ -114,16 +114,16 @@
 ;; (require 'init-rust)
 (require 'init-toml)
 (require 'init-yaml)
-;; (require 'init-docker)
-;; (require 'init-terraform)
+(require 'init-docker)
+(require 'init-terraform)
 ;; (require 'init-nix)
 ;; (maybe-require-package 'nginx-mode)
 
 (require 'init-paredit)
 (require 'init-lisp)
 (require 'init-slime)
-(require 'init-clojure)
-(require 'init-clojure-cider)
+;; (require 'init-clojure)
+;; (require 'init-clojure-cider)
 ;; (require 'init-common-lisp)
 
 (when *spell-check-support-enabled*
@@ -148,9 +148,9 @@
 (maybe-require-package 'dotenv-mode)
 (maybe-require-package 'shfmt)
 
-;; (when (maybe-require-package 'uptimes)
-;;   (setq-default uptimes-keep-count 200)
-;;   (add-hook 'after-init-hook (lambda () (require 'uptimes))))
+(when (maybe-require-package 'uptimes)
+  (setq-default uptimes-keep-count 200)
+  (add-hook 'after-init-hook (lambda () (require 'uptimes))))
 
 (when (fboundp 'global-eldoc-mode)
   (add-hook 'after-init-hook 'global-eldoc-mode))
