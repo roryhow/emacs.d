@@ -11,6 +11,8 @@
   (when (executable-find "rg")
     (setq-default projectile-generic-command "rg --files --hidden"))
 
+  (maybe-require-package 'projectile-ripgrep)
+
   (with-eval-after-load 'projectile
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
