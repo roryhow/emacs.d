@@ -18,7 +18,35 @@
 (load-theme 'monokai t)
 (set-face-attribute 'default nil :height 140)
 
-(maybe-require-package 'direnv)
+(require-package 'direnv)
+(require-package 'protobuf-mode)
+
+(defun projectile-file-copy-path ()
+  "Gets the path for the current file relative to the project root."
+  (interactive)
+  (let (path (file-relative-name buffer-file-name (projectile-project-root)))
+    (kill-new path)
+    (message "%s added to kill ring." path)))
+
+;; Credit to https://github.com/magit/forge/issues/91#issuecomment-1003823864
+(defun forge-browse-buffer-file ()
+  "Browse the current file at REMOTE, highlighting region if selected."
+  (interactive)
+  (browse-url
+   (let
+       ((rev (magit-rev-abbrev "HEAD"))
+        (repo (forge-get-repository 'stub))
+        (file (magit-file-relative-name buffer-file-name))
+        (highlight
+         (if
+             (use-region-p)
+             (let ((l1 (line-number-at-pos (region-beginning)))
+                   (l2 (line-number-at-pos (- (region-end) 1))))
+               (format "#L%d-L%d" l1 l2))
+           ""
+           )))
+     (forge--format repo "https://%h/%o/%n/blob/%r/%f%L"
+                    `((?r . ,rev) (?f . ,file) (?L . ,highlight))))))
 
 (provide 'init-local)
 ;;; init-local.el ends here
