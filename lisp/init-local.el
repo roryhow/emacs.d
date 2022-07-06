@@ -24,7 +24,7 @@
 (defun projectile-file-copy-path ()
   "Gets the path for the current file relative to the project root."
   (interactive)
-  (let (path (file-relative-name buffer-file-name (projectile-project-root)))
+  (let ((path (file-relative-name buffer-file-name (projectile-project-root))))
     (kill-new path)
     (message "%s added to kill ring." path)))
 
