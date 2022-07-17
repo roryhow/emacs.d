@@ -20,6 +20,7 @@
 
 (require-package 'direnv)
 (require-package 'protobuf-mode)
+(require-package 'vterm)
 
 (defun projectile-file-copy-path ()
   "Gets the path for the current file relative to the project root."

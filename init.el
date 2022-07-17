@@ -115,7 +115,7 @@
 (require 'init-toml)
 (require 'init-yaml)
 (require 'init-docker)
-(require 'init-kubernetes)
+;; (require 'init-kubernetes)
 (require 'init-terraform)
 ;; (require 'init-nix)
 ;; (maybe-require-package 'nginx-mode)

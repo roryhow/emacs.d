@@ -5,6 +5,7 @@
 (maybe-require-package 'go-mode)
 (maybe-require-package 'go-projectile)
 (maybe-require-package 'gotest)
+(maybe-require-package 'go-playground)
 (maybe-require-package 'flycheck-golangci-lint)
 
 (add-hook 'go-mode-hook 'lsp)
@@ -17,6 +18,13 @@
   (setq tab-width 2 indent-tabs-mode 1) ; std go whitespace configuration
   (add-hook 'before-save-hook 'gofmt-before-save) ; run gofmt on each save
 
+  ;; module support in go-playground
+  (setq
+   go-playground-init-command "go mod init"
+   go-playground-go-command "GO111MODULE=on go"
+   go-playground-basedir (concat (getenv "GOPATH") "/src/playground/" (getenv "USER")))
+  
+  ;; Additional go-test arguments
   (setq go-test-args "-race -failfast -timeout 10m -v")
 
   ;; Shortcuts for common go-test invocations.
@@ -34,3 +42,6 @@
 
 (provide 'init-go)
 ;;; init-go.el ends here
+
+
+
