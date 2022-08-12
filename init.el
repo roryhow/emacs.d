@@ -119,6 +119,7 @@
 (require 'init-terraform)
 ;; (require 'init-nix)
 ;; (maybe-require-package 'nginx-mode)
+(require 'init-plantuml)
 
 (require 'init-paredit)
 (require 'init-lisp)
