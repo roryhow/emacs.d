@@ -29,6 +29,5 @@
   ;;   (add-hook 'after-init-hook 'company-quickhelp-mode))
   )
 
-
 (provide 'init-company)
 ;;; init-company.el ends here

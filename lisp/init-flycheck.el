@@ -13,6 +13,5 @@
     (when (maybe-require-package 'diminish)
       (diminish 'flycheck-mode))))
 
-
 (provide 'init-flycheck)
 ;;; init-flycheck.el ends here

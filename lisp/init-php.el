@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-
-;; Add some config for 
-
 (add-to-list 'auto-mode-alist '("\\.\\(inc\\|module\\)?\\'" . php-mode))
 
 (add-hook 'php-mode-hook 'lsp)
