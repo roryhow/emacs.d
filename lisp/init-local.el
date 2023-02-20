@@ -21,6 +21,10 @@
 (require-package 'direnv)
 (require-package 'protobuf-mode)
 (require-package 'vterm)
+(require-package 'cue-mode) ;; for cue files
+
+
+(setq magit-refresh-status-buffer nil)
 
 (defun projectile-file-copy-path ()
   "Gets the path for the current file relative to the project root."

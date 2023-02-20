@@ -398,18 +398,5 @@ typical word processor."
 (eval-after-load "org"
   '(require 'ox-md nil t))
 
-
-
-;; Org-Roam configuration
-
-(maybe-require-package 'org-roam)
-(with-eval-after-load 'org-roam
-  (setq org-roam-directory "~/Documents/roam"))
-
-(define-key global-map (kbd "C-c n l") 'org-roam-buffer-toggle)
-(define-key global-map (kbd "C-c n f") 'org-roam-node-find)
-
-(setq org-roam-v2-ack t)
-
 (provide 'init-org)
 ;;; init-org.el ends here

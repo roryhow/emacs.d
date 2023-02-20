@@ -54,7 +54,7 @@
 
 (require 'init-frame-hooks)
 ;; (require 'init-xterm)
-;; (require 'init-themes)
+(require 'init-themes)
 (require 'init-osx-keys)
 (require 'init-gui-frames)
 (require 'init-dired)
@@ -62,15 +62,15 @@
 (require 'init-grep)
 (require 'init-uniquify)
 (require 'init-ibuffer)
-(require 'init-flymake)
-(require 'init-eglot)
+(require 'init-flycheck)
+;; (require 'init-flymake) ;; TODO not working, fix
+;; (require 'init-eglot)
 
 (require 'init-recentf)
 (require 'init-minibuffer)
 (require 'init-hippie-expand)
-(require 'init-company)
 (require 'init-lsp)
-(require 'init-corfu)
+;; (require 'init-corfu)
 (require 'init-windows)
 ;; (require 'init-sessions)
 ;; (require 'init-mmm)
@@ -82,7 +82,6 @@
 ;; (require 'init-darcs)
 (require 'init-git)
 (require 'init-github)
-(require 'init-go)
 
 (require 'init-projectile)
 
@@ -92,6 +91,7 @@
 (require 'init-markdown)
 ;; (require 'init-csv)
 ;; (require 'init-erlang)
+(require 'init-go)
 (require 'init-javascript)
 (require 'init-typescript)
 ;; (require 'init-php)
@@ -109,7 +109,7 @@
 ;; (require 'init-ruby)
 ;; (require 'init-rails)
 ;; (require 'init-sql)
-(require 'init-scala)
+;; (require 'init-scala)
 ;; (require 'init-ocaml)
 ;; (require 'init-j)
 ;; (require 'init-nim)
