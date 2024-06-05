@@ -9,7 +9,7 @@
   (setq-default projectile-mode-line-prefix " Proj")
 
   (when (executable-find "rg")
-    (setq-default projectile-generic-command "rg --files --hidden"))
+    (setq-default projectile-generic-command "rg --files --hidden -0"))
 
   (maybe-require-package 'projectile-ripgrep)
 
