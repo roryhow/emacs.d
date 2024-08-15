@@ -36,6 +36,7 @@
 
 
 (setq custom-file (locate-user-emacs-file "custom.el"))
+(require 'init-exec-path)
 (require 'init-utils)
 (require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
 ;; Calls (package-initialize)
@@ -107,13 +108,14 @@
 (require 'init-typescript)
 ;; (require 'init-php)
 ;; (require 'init-latex)
-(require 'init-org)
+;; (require 'init-org)
 ;; (require 'init-nxml)
 ;; (require 'init-html)
 ;; (require 'init-css)
 ;; (require 'init-haml)
-(require 'init-http)
+;; (require 'init-http)
 (require 'init-python)
+(require 'init-kotlin)
 ;; (require 'init-haskell)
 ;; (require 'init-elm)
 ;; (require 'init-purescript)

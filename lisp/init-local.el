@@ -69,6 +69,17 @@
                (split-window-below))))))
 
 (setq split-window-preferred-function #'my-split-window-sensibly)
+(add-to-list 'default-frame-alist '(undecorated-round . t))
+
+(defun my-append-env-var (var-name value)
+  "Append VALUE to the beginning of current value of env variable VAR-NAME."
+  (setenv var-name (if (getenv var-name)
+                       (format "%s:%s" value (getenv var-name))
+                     value)))
+
+(let ((gccjitpath "/opt/homebrew/lib/gcc/14:/opt/homebrew/lib"))
+  (mapc (lambda (var-name) (my-append-env-var var-name gccjitpath))
+        '("LIBRARY_PATH" "LD_LIBRARY_PATH" "PATH")))
 
 (provide 'init-local)
 ;;; init-local.el ends here

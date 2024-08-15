@@ -2,22 +2,20 @@
 ;;; Commentary:
 ;;; Code:
 
-(maybe-require-package 'elpy)
-(with-eval-after-load 'python
-  (setq elpy-rpc-python-command "python3")
-  (elpy-enable))
+(require-package 'pet)
 
-;; See the following note about how I set up python + virtualenv to
-;; work seamlessly with Emacs:
-;; https://gist.github.com/purcell/81f76c50a42eee710dcfc9a14bfc7240
 
+;; Emacs 29+
+;; This will turn on `pet-mode' on `python-mode' and `python-ts-mode'
+(add-hook 'python-base-mode-hook 'pet-mode -10)
+(add-hook 'python-base-mode-hook 'lsp)
 
 (setq auto-mode-alist
       (append '(("SConstruct\\'" . python-mode)
                 ("SConscript\\'" . python-mode))
               auto-mode-alist))
 
-(setq python-shell-interpreter "python3")
+;; (setq python-shell-interpreter "python3")
 
 (require-package 'pip-requirements)
 

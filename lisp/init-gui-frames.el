@@ -36,8 +36,8 @@
 (menu-bar-mode -1)
 
 (let ((no-border '(internal-border-width . 0)))
-  (add-to-list 'default-frame-alist no-border)
-  (add-to-list 'initial-frame-alist no-border))
+  (add-to-list 'default-frame-alist '(undecorated-round . t))
+  (add-to-list 'initial-frame-alist '(undecorated-round . t)))
 
 (defun sanityinc/adjust-opacity (frame incr)
   "Adjust the background opacity of FRAME by increment INCR."
