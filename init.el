@@ -36,7 +36,31 @@
 
 
 (setq custom-file (locate-user-emacs-file "custom.el"))
-(require 'init-exec-path)
+(require 'init-utils)
+(require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
+;; Calls (package-initialize)
+(require 'init-elpa)      ;; Machinery for installing required packages
+(require 'init-exec-path) ;; Set up $PATH
+
+
+;; General performance tuning
+(when (require-package 'gcmh)
+  (setq gcmh-high-cons-threshold (* 128 1024 1024))
+  (add-hook 'after-init-hook (lambda ()
+                               (gcmh-mode)
+                               (diminish 'gcmh-mode))))
+
+(setq jit-lock-defer-time 0)
+;;; init.el --- Load the full configuration -*- lexical-binding: t -*-
+;;; Commentary:
+
+;; This file bootstraps the configuration, which is divided into
+;; a number of other files.
+
+;;; Code:
+
+;; Produce backtraces when errors occur: can be helpful to diagnose startup issues
+;;(setq debug-on(require 'init-exec-path)
 (require 'init-utils)
 (require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
 ;; Calls (package-initialize)
@@ -55,7 +79,7 @@
 
 
 ;; Allow users to provide an optional "init-preload-local.el"
-;; (require 'init-preload-local nil t)
+(require 'init-preload-local nil t)
 
 ;; Load configs for specific features and modes
 ;;----------------------------------------------------------------------------
