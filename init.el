@@ -146,7 +146,7 @@
 ;; (require 'init-ruby)
 ;; (require 'init-rails)
 ;; (require 'init-sql)
-;; (require 'init-scala)
+(require 'init-scala)
 ;; (require 'init-ocaml)
 ;; (require 'init-j)
 ;; (require 'init-nim)
