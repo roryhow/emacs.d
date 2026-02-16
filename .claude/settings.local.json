@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(emacs:*)",
+      "Bash(mdfind:*)",
+      "Bash(/Applications/Emacs.app/Contents/MacOS/Emacs:*)",
+      "Bash(echo:*)"
+    ]
+  }
+}

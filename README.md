@@ -1,125 +1,109 @@
-[![Build Status](https://github.com/purcell/emacs.d/workflows/CI/badge.svg)](https://github.com/purcell/emacs.d/actions)
-<a href="https://www.patreon.com/sanityinc"><img alt="Support me" src="https://img.shields.io/badge/Support%20Me-%F0%9F%92%97-ff69b4.svg"></a>
+# emacs.d
 
-# A reasonable Emacs config
+A minimal, `use-package`-based Emacs configuration. All packages are installed automatically on first launch via MELPA.
 
-This is my emacs configuration tree, continually used and tweaked
-since 2000, and it may be a good starting point for other Emacs
-users, especially web developers. These days it's
-somewhat geared towards OS X, but it is known to also work on Linux
-and Windows.
+## Structure
 
-Emacs itself comes with support for many programming languages. This
-config adds improved defaults and extended support for the following, listed
-in the approximate order of how much I use them, from most to least:
+```
+~/.emacs.d/
+  early-init.el          -- GC tuning, GUI suppression before init
+  init.el                -- Package bootstrap, core settings, module loading
+  custom.el              -- Emacs customize storage (auto-managed)
+  lisp/
+    init-ui.el           -- Theme, editing helpers, visual niceties
+    init-completion.el   -- Minibuffer completion stack
+    init-dev.el          -- Git, projects, syntax checking, LSP, tree-sitter
+    init-javascript.el   -- JavaScript / JSON
+    init-typescript.el   -- TypeScript / TSX
+    init-kotlin.el       -- Kotlin
+    init-python.el       -- Python
+    init-scala.el        -- Scala / sbt
+    init-go.el           -- Go
+    init-yaml.el         -- YAML
+    init-docker.el       -- Dockerfiles, Compose, container management
+    init-terraform.el    -- Terraform
+```
 
-* Haskell / Purescript / Elm / OCaml
-* Ruby / Ruby on Rails
-* SQL
-* CSS / LESS / SASS / SCSS
-* Javascript / Typescript
-* HTML / HAML / Markdown / Textile / ERB
-* Common Lisp (with Slime)
-* Python
-* Rust
-* Clojure (with Cider and nRepl)
-* PHP
-* Erlang
+## Language support
 
-Included is a nice setup for in-buffer autocompletion with
-[corfu](https://github.com/minad/corfu), and minibuffer completion using
-[vertico](https://github.com/minad/vertico).
+Each language module hooks into `lsp-mode` for IDE features (completion, diagnostics, navigation, refactoring). You'll need the corresponding language server installed on your system.
 
-`flymake` (re-using backends from [flycheck](http://www.flycheck.org))
-is used to immediately highlight syntax errors in Ruby, Python,
-Javascript, Haskell and a number of other languages.
+| Language   | Mode              | Language server          |
+|------------|-------------------|--------------------------|
+| JavaScript | `js-mode`         | typescript-language-server |
+| TypeScript | `typescript-mode` | typescript-language-server |
+| TSX        | `web-mode`        | typescript-language-server |
+| Kotlin     | `kotlin-mode`     | kotlin-language-server   |
+| Python     | `python-mode`     | pyright / pylsp          |
+| Scala      | `scala-mode`      | Metals                   |
+| Go         | `go-mode`         | gopls                    |
 
-LSP support is provided using `eglot`.
+Additional language-specific tooling:
 
-Various popular Emacs tools are included and configured here, such as
-`magit`, `docker.el`, `projectile`, `org-mode` etc., but the focus is moderate
+- **Go** -- `gofmt-before-save`, `gotest` for running tests (`C-c a` project, `C-c m` file, `C-c .` current test)
+- **Python** -- `ruff-format` for formatting, `pip-requirements` mode, `pyproject.toml` recognised as project root
+- **Scala** -- `sbt-mode` for build interaction, `lsp-metals` for Metals integration
+- **TypeScript** -- `web-mode` handles `.tsx` files with JSX support
+- **JavaScript** -- `js2-mode` for enhanced parsing, `json-mode` for JSON
+- **Terraform** -- `reformatter` for `terraform fmt` on save
+- **Docker** -- `dockerfile-mode`, `docker-compose-mode`, and `docker` for container management
 
-## Supported Emacs versions
+## Packages
 
-Use the latest released Emacs version available to you. The author
-typically uses the latest stable version.
+### Completion (init-completion.el)
 
-The config should run on Emacs 27.1 or greater and is designed to
-degrade smoothly - see the CI build - but many enhancements may be
-unavailable if your Emacs is too old, and in general you should try
-to use the latest stable Emacs release like I do.
+- **vertico** -- Vertical minibuffer completion UI
+- **orderless** -- Space-separated fuzzy matching (type terms in any order)
+- **consult** -- Enhanced buffer switching, goto-line, ripgrep search
+- **embark** -- Contextual actions on minibuffer candidates
+- **embark-consult** -- Integration between embark and consult
+- **marginalia** -- Rich annotations (keybindings, file sizes, descriptions) next to candidates
 
-## Other requirements
+### UI (init-ui.el)
 
-To make the most of the programming language-specific support in this
-config, further programs will likely be required, particularly those
-that flycheck or flymake use to provide on-the-fly syntax checking.
+- **monokai-theme** -- Dark color theme
+- **dimmer** -- Dims inactive windows
+- **default-text-scale** -- Global font size adjustment
+- **which-key** -- Shows available keybindings after a key prefix
+- **rainbow-delimiters** -- Colored nested brackets/parens by depth
+- **mode-line-bell** -- Visual flash instead of audible bell
+- **multiple-cursors** -- Edit at multiple points simultaneously
+- **avy** -- Jump to visible text with character hints
+
+### Development (init-dev.el)
+
+- **magit** -- Git porcelain (`C-x g` for status)
+- **git-modes** -- Syntax highlighting for gitconfig, gitignore, etc.
+- **git-link** -- Generate repository URLs for current file/line
+- **git-timemachine** -- Step through file history (`C-x v t`)
+- **projectile** -- Project management and navigation (`C-c p` prefix)
+- **projectile-ripgrep** -- Ripgrep search within projects
+- **flycheck** -- On-the-fly syntax checking
+- **lsp-mode** -- Language Server Protocol client
+- **lsp-ui** -- LSP UI enhancements (sideline, peek, doc)
+- **envrc** -- Direnv integration for per-project environment variables (`C-c e` prefix)
+
+### Core (init.el)
+
+- **exec-path-from-shell** -- Imports shell PATH into Emacs (macOS)
+- **gcmh** -- Garbage collection tuning (high threshold during use, collect when idle)
 
 ## Installation
 
-To install, clone this repo to `~/.emacs.d`, i.e. ensure that the
-`init.el` contained in this repo ends up at `~/.emacs.d/init.el`:
+Clone to `~/.emacs.d`:
 
 ```
 git clone https://github.com/rhow93/emacs.d.git ~/.emacs.d
 ```
 
-Upon starting up Emacs for the first time, further third-party
-packages will be automatically downloaded and installed. If you
-encounter any errors at that stage, try restarting Emacs, and possibly
-running `M-x package-refresh-contents` before doing so.
+Start Emacs. All packages will be downloaded and installed automatically on first launch. If you see errors, restart Emacs or run `M-x package-refresh-contents` first.
 
+## macOS
 
-## Updates
+The config assumes macOS by default:
 
-Update the config with `git pull`. You'll probably also want/need to
-update the third-party packages regularly too, because that's what I
-do, and the config assumes it:
-
-<kbd>M-x package-list-packages</kbd>, then <kbd>U</kbd> followed by <kbd>x</kbd>.
-
-You should usually restart Emacs after pulling changes or updating
-packages so that they can take effect. Emacs should usually restore
-your working buffers when you restart due to this configuration's use
-of the `desktop` and `session` packages.
-
-## Changing themes and adding your own customization
-
-To add your own customization, use <kbd>M-x customize</kbd>, <kbd>M-x
-customize-themes</kbd> etc. and/or create a file
-`~/.emacs.d/lisp/init-local.el` which looks like this:
-
-```el
-... your code here ...
-
-(provide 'init-local)
-```
-
-If you need initialisation code which executes earlier in the startup process,
-you can also create an `~/.emacs.d/lisp/init-preload-local.el` file.
-
-If you plan to customize things more extensively, you should probably
-just fork the repo and hack away at the config to make it your own!
-Remember to regularly merge in changes from this repo, so that your
-config remains compatible with the latest package and Emacs versions.
-
-*Please note that I cannot provide support for customised versions of
-this configuration.*
-
-## Support / issues
-
-If you hit any problems, please first ensure that you are using the latest version
-of this code, and that you have updated your packages to the most recent available
-versions (see "Updates" above). If you still experience problems, go ahead and
-[file an issue on the github project](https://github.com/purcell/emacs.d).
-
--Steve Purcell
-
-<hr>
-
-
-[💝 Support this project and my other Open Source work](https://www.patreon.com/sanityinc)
-
-[💼 LinkedIn profile](https://uk.linkedin.com/in/stevepurcell)
-
-[✍ sanityinc.com](http://www.sanityinc.com/)
+- Cmd is bound to Meta, right-Cmd to Super, Option passes through for special characters
+- Menu bar is kept enabled (required for Cmd+Tab app switching)
+- `exec-path-from-shell` imports your shell PATH
+- GCC JIT library paths are configured for Homebrew native compilation
+- Frames use the `undecorated-round` style

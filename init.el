@@ -1,235 +1,164 @@
-;;; init.el --- Load the full configuration -*- lexical-binding: t -*-
+;;; init.el --- Main configuration entry point -*- lexical-binding: t -*-
 ;;; Commentary:
-
-;; This file bootstraps the configuration, which is divided into
-;; a number of other files.
-
+;; Bootstrap use-package, set core defaults, and load modules.
 ;;; Code:
 
-;; Produce backtraces when errors occur: can be helpful to diagnose startup issues
-;;(setq debug-on-error t)
+;;; --- Package bootstrap ---
 
-(let ((minver "27.1"))
-  (when (version< emacs-version minver)
-    (error "Your Emacs is too old -- this config requires v%s or higher" minver)))
-(when (version< emacs-version "28.1")
-  (message "Your Emacs is old, and some functionality in this config will be disabled. Please upgrade if possible."))
+(require 'package)
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("gnu"   . "https://elpa.gnu.org/packages/")))
+
+;; Per-version elpa directory to avoid bytecode mismatch
+(setq package-user-dir
+      (expand-file-name (format "elpa-%s" emacs-version) user-emacs-directory))
+
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+(eval-when-compile (require 'use-package))
+(setq use-package-always-ensure t)
+
+
+;;; --- Core settings ---
+
+;; UTF-8 everywhere
+(set-language-environment "UTF-8")
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+
+;; Custom file
+(setq custom-file (locate-user-emacs-file "custom.el"))
+(when (file-exists-p custom-file)
+  (load custom-file))
+
+;; No backups, lockfiles, or autosave
+(setq make-backup-files nil
+      create-lockfiles nil
+      auto-save-default nil)
+
+;; Indentation defaults
+(setq-default tab-width 2
+              standard-indent 2
+              indent-tabs-mode nil)
+
+;; Process performance tuning
+(setq read-process-output-max (* 4 1024 1024)
+      process-adaptive-read-buffering nil)
+
+;; Misc
+(setq inhibit-startup-screen t
+      use-file-dialog nil
+      use-dialog-box nil
+      custom-safe-themes t
+      frame-title-format "Emacs")
+
+
+;;; --- macOS keys ---
+
+(when (eq system-type 'darwin)
+  (setq mac-command-modifier 'meta
+        mac-right-command-modifier 'super
+        mac-option-modifier 'none)
+  (menu-bar-mode t) ; needed for Cmd+Tab on macOS
+  (global-set-key (kbd "M-`") 'ns-next-frame)
+  (global-set-key (kbd "M-h") 'ns-do-hide-emacs)
+  (global-set-key (kbd "M-˙") 'ns-do-hide-others)
+  (global-set-key (kbd "M-ˍ") 'ns-do-hide-others))
+
+
+;;; --- Shell PATH ---
+
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns x))
+  :config (exec-path-from-shell-initialize))
+
+
+;;; --- GC management ---
+
+(use-package gcmh
+  :diminish
+  :config
+  (setq gcmh-high-cons-threshold (* 128 1024 1024))
+  (gcmh-mode 1))
+
+
+;;; --- GCC JIT library paths (native-comp on macOS) ---
+
+(defun my-append-env-var (var-name value)
+  "Prepend VALUE to the environment variable VAR-NAME."
+  (setenv var-name (if (getenv var-name)
+                       (format "%s:%s" value (getenv var-name))
+                     value)))
+
+(let ((gccjitpath "/opt/homebrew/lib/gcc/14:/opt/homebrew/lib"))
+  (mapc (lambda (var-name) (my-append-env-var var-name gccjitpath))
+        '("LIBRARY_PATH" "LD_LIBRARY_PATH" "PATH")))
+
+
+;;; --- Window management ---
+
+(add-hook 'after-init-hook 'winner-mode)
+
+(setq split-height-threshold 120
+      split-width-threshold 160)
+
+(defun my-split-window-sensibly (&optional window)
+  "Replacement `split-window-sensibly' that prefers vertical splits."
+  (interactive)
+  (let ((window (or window (selected-window))))
+    (or (and (window-splittable-p window t)
+             (with-selected-window window
+               (split-window-right)))
+        (and (window-splittable-p window)
+             (with-selected-window window
+               (split-window-below))))))
+
+(setq split-window-preferred-function #'my-split-window-sensibly)
+
+
+;;; --- Font & theme ---
+
+(set-face-attribute 'default nil :height 140)
+
+
+;;; --- Frame settings ---
+
+(add-to-list 'default-frame-alist '(undecorated-round . t))
+(setq-default window-resize-pixelwise t
+              frame-resize-pixelwise t)
+(when (fboundp 'pixel-scroll-precision-mode)
+  (pixel-scroll-precision-mode))
+
+
+;;; --- Load modules ---
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
-(require 'init-benchmarking) ;; Measure startup time
 
-(defconst *spell-check-support-enabled* nil) ;; Enable with t if you prefer
-(defconst *is-a-mac* (eq system-type 'darwin))
-
-
-;; Adjust garbage collection threshold for early startup (see use of gcmh below)
-(setq gc-cons-threshold (* 128 1024 1024))
-
-
-;; Process performance tuning
-
-(setq read-process-output-max (* 4 1024 1024))
-(setq process-adaptive-read-buffering nil)
-
-
-;; Bootstrap config
-
-
-(setq custom-file (locate-user-emacs-file "custom.el"))
-(require 'init-utils)
-(require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
-;; Calls (package-initialize)
-(require 'init-elpa)      ;; Machinery for installing required packages
-(require 'init-exec-path) ;; Set up $PATH
-
-
-;; General performance tuning
-(when (require-package 'gcmh)
-  (setq gcmh-high-cons-threshold (* 128 1024 1024))
-  (add-hook 'after-init-hook (lambda ()
-                               (gcmh-mode)
-                               (diminish 'gcmh-mode))))
-
-(setq jit-lock-defer-time 0)
-;;; init.el --- Load the full configuration -*- lexical-binding: t -*-
-;;; Commentary:
-
-;; This file bootstraps the configuration, which is divided into
-;; a number of other files.
-
-;;; Code:
-
-;; Produce backtraces when errors occur: can be helpful to diagnose startup issues
-;;(setq debug-on(require 'init-exec-path)
-(require 'init-utils)
-(require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
-;; Calls (package-initialize)
-(require 'init-elpa)      ;; Machinery for installing required packages
-(require 'init-exec-path) ;; Set up $PATH
-
-
-;; General performance tuning
-(when (require-package 'gcmh)
-  (setq gcmh-high-cons-threshold (* 128 1024 1024))
-  (add-hook 'after-init-hook (lambda ()
-                               (gcmh-mode)
-                               (diminish 'gcmh-mode))))
-
-(setq jit-lock-defer-time 0)
-
-
-;; Allow users to provide an optional "init-preload-local.el"
-(require 'init-preload-local nil t)
-
-;; Load configs for specific features and modes
-;;----------------------------------------------------------------------------
-
-(require-package 'diminish)
-(maybe-require-package 'scratch)
-(require-package 'command-log-mode)
-
-(require 'init-frame-hooks)
-;; (require 'init-xterm)
-(require 'init-themes)
-(require 'init-osx-keys)
-(require 'init-gui-frames)
-(require 'init-dired)
-;; (require 'init-isearch)
-(require 'init-grep)
-(require 'init-uniquify)
-(require 'init-ibuffer)
-(require 'init-flycheck)
-;; (require 'init-flymake) ;; TODO not working, fix
-;; (require 'init-eglot)
-
-(require 'init-recentf)
-(require 'init-minibuffer)
-(require 'init-hippie-expand)
-(require 'init-lsp)
-;; (require 'init-corfu)
-(require 'init-windows)
-;; (require 'init-sessions)
-;; (require 'init-mmm)
-
-(require 'init-editing-utils)
-;; (require 'init-whitespace)
-
-;; (require 'init-vc)
-;; (require 'init-darcs)
-(require 'init-git)
-(require 'init-github)
-
-(require 'init-projectile)
-
-;; (require 'init-compile)
-;;(require 'init-crontab)
-;; (require 'init-textile)
-(require 'init-markdown)
-;; (require 'init-csv)
-;; (require 'init-erlang)
-;; (require 'init-go)
+(require 'init-ui)
+(require 'init-completion)
+(require 'init-dev)
 (require 'init-javascript)
 (require 'init-typescript)
-;; (require 'init-php)
-;; (require 'init-latex)
-;; (require 'init-org)
-;; (require 'init-nxml)
-;; (require 'init-html)
-;; (require 'init-css)
-;; (require 'init-haml)
-;; (require 'init-http)
-(require 'init-python)
 (require 'init-kotlin)
-;; (require 'init-haskell)
-;; (require 'init-elm)
-;; (require 'init-purescript)
-;; (require 'init-ruby)
-;; (require 'init-rails)
-;; (require 'init-sql)
+(require 'init-python)
 (require 'init-scala)
-;; (require 'init-ocaml)
-;; (require 'init-j)
-;; (require 'init-nim)
-;; (require 'init-rust)
-(require 'init-toml)
+(require 'init-go)
 (require 'init-yaml)
 (require 'init-docker)
-;; (require 'init-kubernetes)
 (require 'init-terraform)
-(require 'init-nix)
-(maybe-require-package 'nginx-mode)
-(maybe-require-package 'just-mode)
-(when (maybe-require-package 'just-ts-mode)
-  ;; Undo overly-optimistic autoloading, so that things still work in
-  ;; Emacs 29 without treesitter
-  (sanityinc/remove-auto-mode  'just-ts-mode))
-(maybe-require-package 'justl)
 
-(require 'init-paredit)
-;; (require 'init-lisp)
-;; (require 'init-slime)
-;; (require 'init-clojure)
-;; (require 'init-clojure-cider)
-;; (require 'init-common-lisp)
 
-(when *spell-check-support-enabled*
-  (require 'init-spelling))
+;;; --- Emacs server ---
 
-;; (require 'init-misc)
-
-(require 'init-folding)
-(require 'init-dash)
-
-(require 'init-ledger)
-(require 'init-lua)
-(require 'init-uiua)
-(require 'init-zig)
-(require 'init-terminals)
-
-;; (require 'init-twitter)
-;; (require 'init-mu)
-;; (require 'init-ledger)
-;; Extra packages which don't require any configuration
-
-(require-package 'sudo-edit)
-(maybe-require-package 'gnuplot)
-(require-package 'htmlize)
-(when *is-a-mac*
-  (require-package 'osx-location))
-(maybe-require-package 'dotenv-mode)
-(maybe-require-package 'shfmt)
-
-(when (maybe-require-package 'uptimes)
-  (setq-default uptimes-keep-count 200)
-  (add-hook 'after-init-hook (lambda () (require 'uptimes))))
-
-(when (fboundp 'global-eldoc-mode)
-  (add-hook 'after-init-hook 'global-eldoc-mode))
-
-(require 'init-direnv)
-
-(when (and (require 'treesit nil t)
-           (fboundp 'treesit-available-p)
-           (treesit-available-p))
-  (require 'init-treesitter))
-
-
-
-;; Allow access from emacsclient
 (add-hook 'after-init-hook
           (lambda ()
             (require 'server)
             (unless (server-running-p)
               (server-start))))
 
-;; Variables configured via the interactive 'customize' interface
-(when (file-exists-p custom-file)
-  (load custom-file))
-
-;; Locales (setting them earlier in this file doesn't work in X)
-(require 'init-locales)
-
-;; Allow users to provide an optional "init-local" containing personal settings
-(require 'init-local nil t)
-
 (provide 'init)
+;;; init.el ends here

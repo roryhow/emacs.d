@@ -1,16 +1,13 @@
-;;; init-docker.el --- Work with Docker and its tools -*- lexical-binding: t -*-
+;;; init-docker.el --- Docker support -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 
-(when (maybe-require-package 'docker)
-  (sanityinc/fullframe-mode 'docker-image-mode)
-  (sanityinc/fullframe-mode 'docker-machine-mode)
-  (sanityinc/fullframe-mode 'docker-volume-mode)
-  (sanityinc/fullframe-mode 'docker-network-mode)
-  (sanityinc/fullframe-mode 'docker-container-mode))
-(maybe-require-package 'dockerfile-mode)
-(maybe-require-package 'docker-compose-mode)
+(use-package dockerfile-mode)
 
+(use-package docker-compose-mode)
+
+(use-package docker
+  :commands docker)
 
 (provide 'init-docker)
 ;;; init-docker.el ends here

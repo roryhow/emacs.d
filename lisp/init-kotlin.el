@@ -1,11 +1,9 @@
-;;; init-kotlin.el --- Support for Kotlin
+;;; init-kotlin.el --- Kotlin support -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 
-(maybe-require-package 'kotlin-mode)
-
-(add-hook 'kotlin-mode-hook 'lsp)
-(add-hook 'kotlin-mode-hook #'lsp-deferred)
+(use-package kotlin-mode
+  :hook (kotlin-mode . lsp-deferred))
 
 (provide 'init-kotlin)
 ;;; init-kotlin.el ends here
