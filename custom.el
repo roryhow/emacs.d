@@ -8,7 +8,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(browse-kill-ring bug-reference-github
+   '(browse-kill-ring bug-reference-github claude-code-ide
                       color-theme-sanityinc-solarized
                       color-theme-sanityinc-tomorrow command-log-mode
                       cue-mode dash-at-point default-text-scale
@@ -39,7 +39,10 @@
                       unfill uptimes verilog-mode vertico vlf vterm
                       web-mode which-key whole-line-or-region
                       window-tool-bar windswap xref-js2 yagist
-                      zig-mode zig-ts-mode)))
+                      zig-mode zig-ts-mode))
+ '(package-vc-selected-packages
+   '((claude-code-ide :url
+                      "https://github.com/manzaltu/claude-code-ide.el"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
