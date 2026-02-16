@@ -2,6 +2,14 @@
 ;;; Commentary:
 ;;; Code:
 
+(setq-default history-length 1000)
+(add-hook 'after-init-hook 'savehist-mode)
+
+(add-hook 'after-init-hook 'recentf-mode)
+(setq-default
+ recentf-max-saved-items 1000
+ recentf-exclude '("/tmp/" "/ssh:" "/sshx:"))
+
 (use-package vertico
   :config (vertico-mode))
 
