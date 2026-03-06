@@ -26,20 +26,20 @@
                       js-comint json-mode just-mode just-ts-mode justl
                       kotlin-mode ledger-mode list-unicode-display
                       lsp-metals lsp-ui lua-mode magit-todos
-                      marginalia mode-line-bell monokai-theme move-dup
-                      multiple-cursors nginx-mode nix-ts-mode nixfmt
-                      nixpkgs-fmt ns-auto-titlebar orderless org
-                      origami osx-location page-break-lines paredit
-                      peg pet pip-requirements prettier-js
-                      projectile-ripgrep protobuf-mode puni python
-                      rainbow-delimiters restclient rg ruff-format
-                      sbt-mode scratch shfmt sudo-edit switch-window
-                      symbol-overlay terraform-mode tide toml-mode
-                      track-changes tramp typescript-mode uiua-ts-mode
-                      unfill uptimes verilog-mode vertico vlf vterm
-                      web-mode which-key whole-line-or-region
-                      window-tool-bar windswap xref-js2 yagist
-                      zig-mode zig-ts-mode))
+                      marginalia mermaid-mode mode-line-bell
+                      monokai-theme move-dup multiple-cursors
+                      nginx-mode nix-ts-mode nixfmt nixpkgs-fmt
+                      ns-auto-titlebar orderless org origami
+                      osx-location page-break-lines paredit peg pet
+                      pip-requirements prettier-js projectile-ripgrep
+                      protobuf-mode puni python rainbow-delimiters
+                      restclient rg ruff-format sbt-mode scratch shfmt
+                      sudo-edit switch-window symbol-overlay
+                      terraform-mode tide toml-mode track-changes
+                      tramp typescript-mode uiua-ts-mode unfill
+                      uptimes verilog-mode vertico vlf vterm web-mode
+                      which-key whole-line-or-region window-tool-bar
+                      windswap xref-js2 yagist zig-mode zig-ts-mode))
  '(package-vc-selected-packages
    '((claude-code-ide :url
                       "https://github.com/manzaltu/claude-code-ide.el"))))
