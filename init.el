@@ -126,7 +126,6 @@
 
 ;;; --- Frame settings ---
 
-(add-to-list 'default-frame-alist '(undecorated-round . t))
 (setq-default window-resize-pixelwise t
               frame-resize-pixelwise t)
 (when (fboundp 'pixel-scroll-precision-mode)
@@ -149,6 +148,7 @@
 (require 'init-yaml)
 (require 'init-docker)
 (require 'init-terraform)
+(require 'init-terminal)
 
 
 ;;; --- Emacs server ---
