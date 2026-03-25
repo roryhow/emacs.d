@@ -4,7 +4,17 @@
       "Bash(emacs:*)",
       "Bash(mdfind:*)",
       "Bash(/Applications/Emacs.app/Contents/MacOS/Emacs:*)",
-      "Bash(echo:*)"
+      "Bash(echo:*)",
+      "mcp__linear-server__list_issues",
+      "mcp__google-workspace__search_drive_files",
+      "mcp__linear-server__list_projects",
+      "mcp__linear-server__list_teams",
+      "mcp__google-workspace__get_doc_content",
+      "mcp__linear-server__save_issue",
+      "Bash(curl -sI https://github.com/fwcd/kotlin-language-server/releases/latest)",
+      "Bash(find /Users/roryhow/Documents/auxia-inc/source -maxdepth 2 -name DEVELOPMENT* -o -name SETUP* -o -name BUILD*)",
+      "Bash(ls:*)",
+      "mcp__plugin_slack_slack__slack_search_public_and_private"
     ]
   }
 }

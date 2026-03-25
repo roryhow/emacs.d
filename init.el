@@ -97,6 +97,9 @@
   (mapc (lambda (var-name) (my-append-env-var var-name gccjitpath))
         '("LIBRARY_PATH" "LD_LIBRARY_PATH" "PATH")))
 
+;; Use Apple Clang for package compilation (avoids Homebrew GCC 15 _bounds.h issue)
+(setenv "CC" "/usr/bin/cc")
+
 
 ;;; --- Window management ---
 
@@ -121,7 +124,7 @@
 
 ;;; --- Font & theme ---
 
-(set-face-attribute 'default nil :height 140)
+(set-face-attribute 'default nil :height 120)
 
 
 ;;; --- Frame settings ---
@@ -148,6 +151,7 @@
 (require 'init-yaml)
 (require 'init-docker)
 (require 'init-terraform)
+(require 'init-protobuf)
 (require 'init-terminal)
 
 

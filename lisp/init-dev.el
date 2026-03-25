@@ -42,6 +42,8 @@
 ;;; --- LSP ---
 
 (use-package lsp-mode
+  :load-path "~/Documents/roryhow/lsp-mode"
+  :ensure nil
   :commands (lsp lsp-deferred)
   :config
   (setq lsp-file-watch-threshold 5000
