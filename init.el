@@ -142,6 +142,7 @@
 (require 'init-ui)
 (require 'init-completion)
 (require 'init-dev)
+(require 'init-markdown)
 (require 'init-javascript)
 (require 'init-typescript)
 (require 'init-kotlin)

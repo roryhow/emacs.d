@@ -7,21 +7,34 @@
   :config
   (setenv "KOTLIN_LANGUAGE_SERVER_OPTS" "-Xmx4G")
   (with-eval-after-load 'lsp-mode
-    ;; Cache the index to disk so restarts are faster.
     (setq lsp-kotlin-ondisk-cache-enabled t)
-    ;; Allowlist: only watch these directories for file changes.
-    ;; Add services here as you start working on them.
-    (defvar my-lsp-watched-dirs '("common" "delivery"
-                                  "gradle" "buildSrc" "build")
-      "Directories to watch in the Auxia monorepo. Everything else is ignored.")
 
-    (let ((source-dir "~/Documents/auxia-inc/source"))
-      (when (file-directory-p source-dir)
-        (dolist (dir (directory-files source-dir nil "^[^.]"))
-          (when (and (file-directory-p (expand-file-name dir source-dir))
-                     (not (member dir my-lsp-watched-dirs)))
-            (add-to-list 'lsp-file-watch-ignored-directories
-                         (concat "[/\\\\]" (regexp-quote dir) "\\'"))))))))
+    (defvar my-kotlin-monorepo-root "~/Documents/auxia-inc/source"
+      "Root of the Auxia monorepo.")
+
+    (defvar my-kotlin-workspace-dirs '("common" "delivery")
+      "Subdirectories of the monorepo to use as LSP workspace roots.
+Only these will be indexed by the Kotlin language server.
+Add more directories here as you start working on them.")
+
+    (defun my-kotlin-lsp-root ()
+      "Return the nearest watched subdirectory as the LSP project root.
+If the current file lives under one of `my-kotlin-workspace-dirs',
+return that subdirectory instead of the monorepo root. This limits
+what the Kotlin language server indexes at startup."
+      (when-let* ((file (buffer-file-name))
+                  (root (file-name-as-directory
+                         (expand-file-name my-kotlin-monorepo-root))))
+        (cl-loop for dir in my-kotlin-workspace-dirs
+                 for full = (file-name-as-directory
+                             (expand-file-name dir root))
+                 when (string-prefix-p full (expand-file-name file))
+                 return (directory-file-name full))))
+
+    (advice-add 'lsp--suggest-project-root :before-until
+                (lambda ()
+                  (when (derived-mode-p 'kotlin-mode)
+                    (my-kotlin-lsp-root))))))
 
 (provide 'init-kotlin)
 ;;; init-kotlin.el ends here

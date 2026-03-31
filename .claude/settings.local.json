@@ -14,7 +14,24 @@
       "Bash(curl -sI https://github.com/fwcd/kotlin-language-server/releases/latest)",
       "Bash(find /Users/roryhow/Documents/auxia-inc/source -maxdepth 2 -name DEVELOPMENT* -o -name SETUP* -o -name BUILD*)",
       "Bash(ls:*)",
-      "mcp__plugin_slack_slack__slack_search_public_and_private"
+      "mcp__plugin_slack_slack__slack_search_public_and_private",
+      "WebSearch",
+      "WebFetch(domain:deepwiki.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:emacs-lsp.github.io)",
+      "Bash(grep -r -l kotlin --include=*.el .)",
+      "Bash(curl -s https://api.github.com/repos/Kotlin/kotlin-lsp)",
+      "Bash(curl -s https://api.github.com/repos/Kotlin/kotlin-lsp/releases)",
+      "Bash(curl -s https://raw.githubusercontent.com/Kotlin/kotlin-lsp/main/README.md)",
+      "Bash(curl -s https://api.github.com/repos/Kotlin/kotlin-lsp/contents/scripts)",
+      "Bash(python3 -c \"import json,sys; [print\\(f[''''name'''']\\) for f in json.loads\\(sys.stdin.read\\(\\)\\)]\")",
+      "Bash(curl -s https://api.github.com/repos/Kotlin/kotlin-lsp/contents/)",
+      "Bash(curl:*)",
+      "Bash(python3 -c \":*)",
+      "Bash(python3 -c \"import json,sys; d=json.loads\\(sys.stdin.read\\(\\)\\); print\\(d.get\\(''''body'''',''''''''\\)[:3000]\\)\")",
+      "Bash(python3 -c \"import json,sys; [print\\(f[''''name''''], f[''''type'''']\\) for f in json.loads\\(sys.stdin.read\\(\\)\\)]\")",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ]
   }
 }
