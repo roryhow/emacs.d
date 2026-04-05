@@ -8,6 +8,7 @@
   (setenv "KOTLIN_LANGUAGE_SERVER_OPTS" "-Xmx4G")
   (with-eval-after-load 'lsp-mode
     (setq lsp-kotlin-ondisk-cache-enabled t)
+    (setq lsp-auto-guess-root t)
 
     (defvar my-kotlin-monorepo-root "~/Documents/auxia-inc/source"
       "Root of the Auxia monorepo.")
